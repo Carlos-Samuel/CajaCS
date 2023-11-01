@@ -4,6 +4,9 @@
  */
 package com.cs.cajacs.interfaces;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+
 /**
  *
  * @author carlossamuelmedinapardo
@@ -15,6 +18,7 @@ public class ModuloLogin extends javax.swing.JFrame {
      */
     public ModuloLogin() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -73,6 +77,9 @@ public class ModuloLogin extends javax.swing.JFrame {
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel2MouseEntered(evt);
             }
         });
 
@@ -158,7 +165,7 @@ public class ModuloLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+    private void jPanel2MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
         dispose();
 
@@ -166,13 +173,18 @@ public class ModuloLogin extends javax.swing.JFrame {
         nuevaVentana.setVisible(true);
     }//GEN-LAST:event_jPanel2MouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextField1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void jPasswordField1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
+        // TODO add your handling code here:
+System.out.println("PISAO");
+    }//GEN-LAST:event_jPanel2MouseEntered
 
     /**
      * @param args the command line arguments
