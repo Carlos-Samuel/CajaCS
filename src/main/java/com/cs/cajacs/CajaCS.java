@@ -32,6 +32,8 @@ public class CajaCS {
         modulo.setVisible(true);
         
         /*
+        
+        //Estos son los ejemplos, no borrar
  
         UsuariosController controller = new UsuariosController();
 
