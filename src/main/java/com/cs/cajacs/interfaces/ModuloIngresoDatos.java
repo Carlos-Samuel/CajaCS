@@ -50,9 +50,11 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         Panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 64)); // NOI18N
         jLabel1.setText("Datos Factura");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 6, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jButton1.setText("Pendiente");
@@ -61,6 +63,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 519, 304, -1));
 
         jButton2.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jButton2.setText("Guardar");
@@ -69,15 +72,19 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 620, 304, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel2.setText("Valor total");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 429, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel3.setText("Prefijo");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 227, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel4.setText("# Factura");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 335, -1, -1));
 
         jTextField1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jTextField1.setText("13");
@@ -86,12 +93,15 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 224, 257, -1));
 
         jTextField2.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jTextField2.setText("2752");
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 332, 257, -1));
 
         jTextField3.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jTextField3.setText("$8.000");
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 426, 257, -1));
 
         jTextField4.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jTextField4.setText("$10.000");
@@ -100,6 +110,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
                 jTextField4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(719, 360, 370, -1));
 
         jButton9.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jButton9.setText("Agregar");
@@ -253,9 +264,11 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
