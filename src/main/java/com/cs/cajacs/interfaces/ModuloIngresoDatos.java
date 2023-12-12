@@ -4,9 +4,21 @@
  */
 package com.cs.cajacs.interfaces;
 
+import com.cs.cajacs.controllers.FacturasController;
+import com.cs.cajacs.controllers.MetodosDePagoController;
+import com.cs.cajacs.controllers.PagosFacturasController;
+import com.cs.cajacs.controllers.UsuariosController;
+import com.cs.cajacs.modelos.Facturas;
+import com.cs.cajacs.modelos.Metodos_de_pago;
+import com.cs.cajacs.modelos.Pagos_Facturas;
+import com.cs.cajacs.modelos.Usuarios;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,11 +31,44 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
      */
     private int indice;
     private List<JButton> botones;
-   
+    private MetodosDePagoController controller = new MetodosDePagoController();
+    private FacturasController controller_factura = new FacturasController();
+    PagosFacturasController controller_pago_factura = new PagosFacturasController();
+    private UsuariosController controller_usuario = new UsuariosController();
+    Facturas factura = null;
+    private int id_metodo ;
     public ModuloIngresoDatos() {
         initComponents();
         botones = new ArrayList<JButton>();
         indice = 0;
+        
+        
+//        MetodosDePagoController controller = new MetodosDePagoController();
+        List<Metodos_de_pago> prueba = controller.getAllMetodosDePago();
+        for (int i = 0; i < prueba.size(); i++) {
+        
+            Metodos_de_pago metodo = prueba.get(i);
+//            System.out.println(metodo.getIdMetodos_de_pago());
+//            System.out.println();
+//        
+//        
+//            System.out.println("hola");
+            JButton boton = new JButton(metodo.getDescripcion() + ' '+ indice) ;
+            
+            boton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Cambiar el texto del JTextField al hacer clic en el botón
+                    jLabel8.setText(metodo.getDescripcion());
+                    id_metodo = metodo.getIdMetodos_de_pago();
+                }
+            });
+            Panel.add(boton);
+            botones.add(boton);
+            indice++;
+            Panel.updateUI();
+        }
+        //controller.close();
 }
 
     /**
@@ -41,20 +86,24 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        jTextPrefijo = new javax.swing.JTextField();
+        jTextNumero = new javax.swing.JTextField();
+        jTextValorTotal = new javax.swing.JTextField();
+        jText_valor = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Panel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextValorTotal1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 64)); // NOI18N
         jLabel1.setText("Datos Factura");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 6, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jButton1.setText("Pendiente");
@@ -63,7 +112,6 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 519, 304, -1));
 
         jButton2.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jButton2.setText("Guardar");
@@ -72,49 +120,37 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 620, 304, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jLabel2.setText("Valor total");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 429, -1, -1));
+        jLabel2.setText("Pendiente");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel3.setText("Prefijo");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 227, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         jLabel4.setText("# Factura");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 335, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jTextField1.setText("13");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextPrefijo.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jTextPrefijo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextPrefijoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 224, 257, -1));
 
-        jTextField2.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jTextField2.setText("2752");
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 332, 257, -1));
+        jTextNumero.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jTextField3.setText("$8.000");
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 426, 257, -1));
+        jTextValorTotal.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jTextField4.setText("$10.000");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jText_valor.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jText_valor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jText_valorActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(719, 360, 370, -1));
 
-        jButton9.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
-        jButton9.setText("Agregar");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButton10.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jButton10.setText("Escanear Factura");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
@@ -123,6 +159,43 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         Panel.setLayout(new java.awt.GridLayout(0, 4));
         jScrollPane1.setViewportView(Panel);
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel5.setText("Medio de Pago:");
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setText("Registrar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTextValorTotal1.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jLabel7.setText("Valor total");
+
+        jLabel8.setText("jLabel8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,83 +203,105 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextPrefijo)
+                            .addComponent(jTextNumero)
+                            .addComponent(jTextValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                            .addComponent(jTextValorTotal1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(129, 129, 129)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(145, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(117, 117, 117)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jText_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(17, 17, 17)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jText_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton2)
-                        .addGap(68, 68, 68))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jButton2)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextPrefijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPrefijoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextPrefijoActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jText_valorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_valorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jText_valorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
+//        dispose();
         
-        ModuloDashboard nuevaVentana = new ModuloDashboard();
-        nuevaVentana.setVisible(true);
+//        ModuloDashboard nuevaVentana = new ModuloDashboard();
+//        nuevaVentana.setVisible(true);
+            String mensaje = "HOLA";
+           JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -218,13 +313,61 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        System.out.println("hola");
-        JButton boton = new JButton("BOTON" + indice) ;
-        Panel.add(boton);
-        botones.add(boton);
-        indice++;
-        Panel.updateUI();
+        factura = controller_factura.getFacturaById(1);
+        System.out.println(factura.getPrefijo());
+        jTextPrefijo.setText(factura.getPrefijo());
+        jTextNumero.setText(factura.getNumFactura());
+        jTextValorTotal.setText(factura.getValorFactura());
+            
+//        System.out.println("hola");
+//        JButton boton = new JButton("BOTON" + indice) ;
+//        Panel.add(boton);
+//        botones.add(boton);
+//        indice++;
+//        Panel.updateUI();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+       int id_usuario = 1;
+        
+        String valor = jText_valor.getText();
+        System.out.println(id_metodo);
+        System.out.println(valor);
+        int numero = 0;
+        try {
+            numero = Integer.parseInt(valor);
+            System.out.println("El número convertido es: " + numero);
+        } catch (NumberFormatException e) {
+            System.out.println("No se puede convertir a entero. Formato no válido.");
+        }
+        
+
+            // Crear un nuevo pago de factura
+        Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
+        // Configura los objetos Facturas, Metodos_de_pago y Usuarios según tus necesidades
+       
+        //buscamos la factura
+        Metodos_de_pago metodoDePago = controller.getMetodoDePagoById(id_metodo);
+        //controller.close();
+        Usuarios usuario = controller_usuario.getUsuarioById(id_usuario);
+        //controller_usuario.close();
+
+        nuevoPagoFactura.setFactura(factura);
+        nuevoPagoFactura.setMetodoDePago(metodoDePago);
+        nuevoPagoFactura.setUsuario(usuario);
+        nuevoPagoFactura.setCantidad(numero); // Cantidad de pago
+
+        controller_pago_factura.createPagoFactura(nuevoPagoFactura);
+        
+        controller_pago_factura.close();
+        jText_valor.setText("");
+        //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showMessageDialog(null, "Registrado correctamente", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
+
+        
+        
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -266,16 +409,20 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextNumero;
+    private javax.swing.JTextField jTextPrefijo;
+    private javax.swing.JTextField jTextValorTotal;
+    private javax.swing.JTextField jTextValorTotal1;
+    private javax.swing.JTextField jText_valor;
     // End of variables declaration//GEN-END:variables
 }
