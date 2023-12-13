@@ -15,6 +15,7 @@ public class ModuloLogin extends javax.swing.JFrame {
      */
     public ModuloLogin() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

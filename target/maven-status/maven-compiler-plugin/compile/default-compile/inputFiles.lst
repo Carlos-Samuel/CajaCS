@@ -14,7 +14,9 @@ C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajac
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Permisos.java
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\MetodosDePagoController.java
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\AuxiliarController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\Formulario_Usuarios.java
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaUsuarios.java
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosHasPermisosController.java
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Pagos_Facturas.java
 C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios.java
