@@ -4,7 +4,7 @@
 
 package com.cs.cajacs;
 
-import com.cs.cajacs.controllers.UsuariosController;
+import com.cs.cajacs.controllers.*;
 import com.cs.cajacs.interfaces.*;
 import com.cs.cajacs.coneccion.*;
 import com.cs.cajacs.modelos.*;
@@ -27,9 +27,9 @@ public class CajaCS {
 
     public static void main(String[] args) {
         
-        ModuloLogin modulo = new ModuloLogin();
+        //ModuloLogin modulo = new ModuloLogin();
         
-        modulo.setVisible(true);
+        //modulo.setVisible(true);
         
         /*
         
@@ -46,40 +46,110 @@ public class CajaCS {
 
         controller.createUsuario(nuevoUsuario);
 
-        System.out.println("Usuario creado con ID: " + nuevoUsuario.getIdUsuarios());
-
         controller.close();
         
         */
         
-        /*
+
+        
         
             //Para crear un Pago Facturas
 
         
-            PagosFacturasController controller = new PagosFacturasController("MiUnidadPersistencia");
+            PagosFacturasController pfcontroller = new PagosFacturasController();
+            FacturasController fcontroller = new FacturasController();
+            UsuariosController ucontroller = new UsuariosController();
+            MetodosDePagoController mcontroller = new MetodosDePagoController();
+            
+            
 
-            // Crear un nuevo pago de factura
+            /*
+            
+            //Crear una factura
+            
+            Facturas nuevaFactura = new Facturas();
+            nuevaFactura.setPrefijo("Prefijo");
+            nuevaFactura.setNumFactura("1231245");
+            nuevaFactura.setValorFactura(10000);
+            
+            fcontroller.createFactura(nuevaFactura);
+            
+            
+            */
+            
+            /*
+            //Crear un metodo de pago
+            
+            Metodos_de_pago nuevoMetodo = new Metodos_de_pago();
+            
+            nuevoMetodo.setDescripcion("Efectivo");
+            
+            mcontroller.createMetodoDePago(nuevoMetodo);
+
+            */
+            
+
             Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
-            // Configura los objetos Facturas, Metodos_de_pago y Usuarios según tus necesidades
-            Facturas factura = ;
-            Metodos_de_pago metodoDePago = ;
-            Usuarios usuario = ;
+            
+            List<Facturas> listaFacturas = fcontroller.getAllFacturas();
+            
+            /*
+            
+            System.out.println("INICIO");
 
+            for (Facturas factura : listaFacturas) {
+                System.out.println("ID de Factura: " + factura.getIdFacturas());
+                System.out.println("Monto de Factura: " + factura.getValorFactura());
+            }
+            
+            System.out.println("FIN");
+            
+            */
+            
+            Facturas factura = fcontroller.getFacturaById(1);
+            
+            Usuarios usuario = ucontroller.getUsuarioById(1);
+                        
+            Metodos_de_pago metodo = mcontroller.getMetodoDePagoById(1);
+                        
+            /*
+ 
             nuevoPagoFactura.setFactura(factura);
-            nuevoPagoFactura.setMetodoDePago(metodoDePago);
+            nuevoPagoFactura.setMetodoDePago(metodo);
             nuevoPagoFactura.setUsuario(usuario);
-            nuevoPagoFactura.setCantidad(5); // Cantidad de pago
+            nuevoPagoFactura.setCantidad(1500L);
 
-            controller.createPagoFactura(nuevoPagoFactura);
+            pfcontroller.createPagoFactura(nuevoPagoFactura);
+            
+            */
 
-            // Realiza otras operaciones según tus necesidades, como obtener pagos de facturas, etc.
+            
+            //Esto no esta funcionando
+            
+            
+            /*
+            
+            System.out.println("INICIO Pagos");
+            
+            List<Pagos_Facturas> lista_Pagos_Facturas = pfcontroller.obtenerPagosPorFacturaId(1);
 
-            // Cierra el controlador al final de la aplicación
-            controller.close();
+            for (Pagos_Facturas pago_factura : lista_Pagos_Facturas) {
+                System.out.println("ID de Factura: " + pago_factura.getFactura().getNumFactura());
+                System.out.println("Metodo de pago: " + pago_factura.getMetodoDePago().getDescripcion());
+                System.out.println("Monto: " + pago_factura.getCantidad());
+            }
+            
+            System.out.println("FIN Pagos");
+
+            */
+            
+            System.out.println("Abonado:");
+            
+            System.out.println(pfcontroller.obtenerAbonadoFacturaId(1));
         
-        */
-        
+            System.out.println("Faltante:");
+            
+            System.out.println(pfcontroller.calcularSaldoPendiente(1));      
 
     }
 }

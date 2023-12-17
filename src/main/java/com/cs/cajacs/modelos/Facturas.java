@@ -32,7 +32,7 @@ public class Facturas {
     private String NumFactura;
 
     @Column(name = "ValorFactura")
-    private String ValorFactura;
+    private Integer ValorFactura;
 
     @Column(name = "Terminado")
     private Boolean Terminado;
@@ -72,11 +72,11 @@ public class Facturas {
         this.NumFactura = NumFactura;
     }
 
-    public String getValorFactura() {
+    public Integer getValorFactura() {
         return ValorFactura;
     }
 
-    public void setValorFactura(String ValorFactura) {
+    public void setValorFactura(Integer ValorFactura) {
         this.ValorFactura = ValorFactura;
     }
 
