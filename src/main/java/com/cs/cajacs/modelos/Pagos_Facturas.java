@@ -32,7 +32,7 @@ public class Pagos_Facturas implements Serializable{
     private Metodos_de_pago metodoDePago;
 
     @Column(name = "Cantidad")
-    private Integer Cantidad;
+    private Long Cantidad;
 
     @Id
     @ManyToOne
@@ -58,11 +58,11 @@ public class Pagos_Facturas implements Serializable{
         this.metodoDePago = metodoDePago;
     }
 
-    public Integer getCantidad() {
+    public Long getCantidad() {
         return Cantidad;
     }
 
-    public void setCantidad(Integer Cantidad) {
+    public void setCantidad(Long Cantidad) {
         this.Cantidad = Cantidad;
     }
 
