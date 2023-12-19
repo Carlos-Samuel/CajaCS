@@ -9,6 +9,7 @@ com\cs\cajacs\interfaces\ModuloLogin$4.class
 com\cs\cajacs\interfaces\ModuloDashboard$7.class
 com\cs\cajacs\interfaces\ModuloIngresoDatos$4.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$3.class
+com\cs\cajacs\interfaces\VistaUsuarios$5.class
 com\cs\cajacs\interfaces\ModuloDashboard$8.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$9.class
 com\cs\cajacs\modelos\Facturas.class
@@ -52,5 +53,6 @@ com\cs\cajacs\interfaces\ModuloIngresoDatos$3.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$2.class
 com\cs\cajacs\modelos\Usuarios.class
 com\cs\cajacs\interfaces\VistaUsuarios$3.class
+com\cs\cajacs\interfaces\VistaUsuarios$6.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$5.class
 com\cs\cajacs\modelos\Usuarios_has_Permisos.class

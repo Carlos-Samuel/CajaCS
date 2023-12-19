@@ -316,6 +316,10 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
 
                 controller_usuario.createUsuario(usuario);
                 System.out.println("USUARIO CREADO CORRECTAMENTE");
+                JOptionPane.showMessageDialog(null, "Usuario creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                VistaUsuarios usuarios_ventana = new VistaUsuarios();
+                usuarios_ventana.setVisible(true);
             } else {
                 if ((contra.equals(""))) {
                     JOptionPane.showMessageDialog(null, "la contraseña no puede estar vacia.", "Error", JOptionPane.ERROR_MESSAGE);
