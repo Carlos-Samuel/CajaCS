@@ -393,6 +393,8 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         String valor = jText_valor.getText();
         
         if (!valor.equals("")){
+            
+            
         System.out.println(id_metodo);
         System.out.println(valor);
         Long numero = null;
