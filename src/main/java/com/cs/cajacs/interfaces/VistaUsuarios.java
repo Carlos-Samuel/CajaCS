@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,10 +23,11 @@ public class VistaUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form USUARIOS
      */
-    String gobal_cedula = null;
+    String gobal_cedula ;
     UsuariosController usuarios_controller = new UsuariosController();
     public VistaUsuarios() {
         initComponents();
+        gobal_cedula = null;
         jEditar.setVisible(false);
         jEliminar.setVisible(false);
         cerrar();
@@ -283,9 +285,13 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
     private void jEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jEditarMouseClicked
         // TODO add your handling code here:
+        System.out.println("????");
         if (gobal_cedula != null){
         
-            System.out.println("gobal_cedula");
+            System.out.println(gobal_cedula);
+            JOptionPane.showMessageDialog(null, "El usuario a editar es ."+gobal_cedula , "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jEditarMouseClicked
 

@@ -29,6 +29,13 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         cerrar();
         this.setLocationRelativeTo(null);
     }
+    
+    public Formulario_Usuarios(String cedula){
+        initComponents();
+        cerrar();
+        this.setLocationRelativeTo(null);
+         JOptionPane.showMessageDialog(null, cedula, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
