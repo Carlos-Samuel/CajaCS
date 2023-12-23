@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -31,9 +33,11 @@ public class CajaCS {
         
         //modulo.setVisible(true);
         
-        /*
         
-        //Estos son los ejemplos, no borrar
+        
+        //Esto es crear usuarios
+        
+        /*
  
         UsuariosController controller = new UsuariosController();
 
@@ -45,16 +49,16 @@ public class CajaCS {
         nuevoUsuario.setPassword("contrasena");
 
         controller.createUsuario(nuevoUsuario);
+        controller.createUsuario(nuevoUsuario);
+        controller.createUsuario(nuevoUsuario);
+        controller.createUsuario(nuevoUsuario);
+        controller.createUsuario(nuevoUsuario);
+        
 
         controller.close();
         
         */
         
-
-        
-        
-            //Para crear un Pago Facturas
-
         
             PagosFacturasController pfcontroller = new PagosFacturasController();
             FacturasController fcontroller = new FacturasController();
@@ -62,8 +66,46 @@ public class CajaCS {
             MetodosDePagoController mcontroller = new MetodosDePagoController();
             
             
-
+            // Para editar o borrar usuarios
+            
             /*
+
+            List<Usuarios> listaUsuarios = ucontroller.getAllUsuarios();
+            
+            System.out.println("INICIO");
+
+            for (Usuarios usuarios : listaUsuarios) {
+                System.out.println(usuarios.toString());
+            }
+            
+            System.out.println("FIN");            
+
+            Usuarios usuario = ucontroller.getUsuarioById(1);
+            
+            usuario.setNombres("Puto");
+            
+            try {
+                ucontroller.editUsuario(usuario);
+                ucontroller.deleteUsuario(5);
+            } catch (Exception ex) {
+                Logger.getLogger(CajaCS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            listaUsuarios = ucontroller.getAllUsuarios();
+            
+            System.out.println("INICIO");
+
+            for (Usuarios usuarios : listaUsuarios) {
+                System.out.println(usuarios.toString());
+            }
+            
+            System.out.println("FIN");  
+            
+            */
+            
+            /*
+            
+            //Para crear un Pago Facturas
             
             //Crear una factura
             
@@ -78,22 +120,24 @@ public class CajaCS {
             */
             
             /*
+            
             //Crear un metodo de pago
             
             Metodos_de_pago nuevoMetodo = new Metodos_de_pago();
             
-            nuevoMetodo.setDescripcion("Efectivo");
+            nuevoMetodo.setDescripcion("Tarjeta");
             
             mcontroller.createMetodoDePago(nuevoMetodo);
 
+            
             */
             
-
-            Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
+            /*
+            
+            
             
             List<Facturas> listaFacturas = fcontroller.getAllFacturas();
             
-            /*
             
             System.out.println("INICIO");
 
@@ -106,23 +150,77 @@ public class CajaCS {
             
             */
             
+            /*
+            
+            Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
+            
+            
             Facturas factura = fcontroller.getFacturaById(1);
             
             Usuarios usuario = ucontroller.getUsuarioById(1);
                         
-            Metodos_de_pago metodo = mcontroller.getMetodoDePagoById(1);
+            Metodos_de_pago metodo = mcontroller.getMetodoDePagoById(2);
                         
-            /*
- 
             nuevoPagoFactura.setFactura(factura);
             nuevoPagoFactura.setMetodoDePago(metodo);
             nuevoPagoFactura.setUsuario(usuario);
-            nuevoPagoFactura.setCantidad(1500L);
+            nuevoPagoFactura.setCantidad(3000L);
 
             pfcontroller.createPagoFactura(nuevoPagoFactura);
             
+            
             */
+            
+            
+            //Obtener la cantidad pagadas por medio de pago por factura
+            
+            /*
+            
+            int cantidad = pfcontroller.obtenerAbonadoMedioPagoFacturaId(1, 1);
+            
+            System.out.println("Factura 1 pago en efectivo "+ cantidad);
+            
+            int cantidad2 = pfcontroller.obtenerAbonadoMedioPagoFacturaId(1, 2);
+            
+            System.out.println("Factura 1 pago en tarjeta " + cantidad2);
+            
+            */
+            
+            //Anular facturas
+            
+            // fcontroller.anularFactura(1);
+            
+            //Editar pago en facturas
+            
+            List<Pagos_Facturas> listaPagosFacturas = pfcontroller.getAllPagosFacturas();
+            
+            System.out.println("INICIO");
 
+            for (Pagos_Facturas pagosFacturas : listaPagosFacturas) {
+                System.out.println(pagosFacturas.toString());
+            }
+            
+            System.out.println("FIN");            
+
+            
+            
+            try {
+                pfcontroller.editPagosFacturas(1, 1, 8888);
+            } catch (Exception ex) {
+                Logger.getLogger(CajaCS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            listaPagosFacturas = pfcontroller.getAllPagosFacturas();
+            
+            System.out.println("INICIO");
+
+            for (Pagos_Facturas pagosFacturas : listaPagosFacturas) {
+                System.out.println(pagosFacturas.toString());
+            }
+            
+            System.out.println("FIN");            
+            
+                                 
             
             //Esto no esta funcionando
             
@@ -141,7 +239,7 @@ public class CajaCS {
             
             System.out.println("FIN Pagos");
 
-            */
+           
             
             System.out.println("Abonado:");
             
@@ -149,7 +247,9 @@ public class CajaCS {
         
             System.out.println("Faltante:");
             
-            System.out.println(pfcontroller.calcularSaldoPendiente(1));      
+            System.out.println(pfcontroller.calcularSaldoPendiente(1));   
+
+             */
 
     }
 }

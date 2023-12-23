@@ -44,6 +44,10 @@ public class Facturas {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fechaTerminada")
     private Date fechaTerminada;
+    
+    @Column(name = "estado", nullable = false)
+    private Boolean estado = true;
+
 
     public Facturas() {}
 
@@ -103,5 +107,17 @@ public class Facturas {
     public void setFechaTerminada(Date fechaTerminada) {
         this.fechaTerminada = fechaTerminada;
     }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+    
+    
+    
+    
 }
 
