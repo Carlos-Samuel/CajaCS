@@ -177,10 +177,10 @@ public class VistaUsuarios extends javax.swing.JFrame {
         );
         jEditarLayout.setVerticalGroup(
             jEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jEditarLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jEditarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jEliminar.setBackground(new java.awt.Color(255, 0, 0));
@@ -222,9 +222,9 @@ public class VistaUsuarios extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalLayout.createSequentialGroup()
                         .addComponent(jEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(jRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
@@ -290,6 +290,9 @@ public class VistaUsuarios extends javax.swing.JFrame {
         
             System.out.println(gobal_cedula);
             JOptionPane.showMessageDialog(null, "El usuario a editar es ."+gobal_cedula , "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            Formulario_Usuarios modal_usuario_editar = new  Formulario_Usuarios(gobal_cedula);
+            this.dispose();
+            modal_usuario_editar.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
