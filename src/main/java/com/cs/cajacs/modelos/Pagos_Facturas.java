@@ -5,12 +5,7 @@
 package com.cs.cajacs.modelos;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Table;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 /**
  *
@@ -21,20 +16,23 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "Pagos_Facturas")
 public class Pagos_Facturas implements Serializable{
-    @Id
+    
+    @EmbeddedId
+    private PagosFacturasId id;
+    
     @ManyToOne
+    @MapsId("facturasId")
     @JoinColumn(name = "Facturas_idFacturas")
     private Facturas factura;
 
-    @Id
     @ManyToOne
+    @MapsId("metodosDePagoId")
     @JoinColumn(name = "Metodos_de_pago_idMetodos_de_pago")
     private Metodos_de_pago metodoDePago;
 
     @Column(name = "Cantidad")
     private Long Cantidad;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "Usuarios_idUsuarios")
     private Usuarios usuario;
@@ -73,5 +71,21 @@ public class Pagos_Facturas implements Serializable{
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
+
+    public PagosFacturasId getId() {
+        return id;
+    }
+
+    public void setId(PagosFacturasId id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return ", Cantidad=" + Cantidad + ", usuario=" + usuario;
+    }
+    
+    
+    
 }
 

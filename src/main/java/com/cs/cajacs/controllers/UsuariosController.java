@@ -58,6 +58,55 @@ public class UsuariosController {
             em.close();
         }
     }
+    
+    public void editUsuario(Usuarios usuario) throws Exception {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        try {
+            Usuarios existingUsuario = em.find(Usuarios.class, usuario.getIdUsuarios());
+            if (existingUsuario != null) {
+
+                existingUsuario.setCedula(usuario.getCedula()); 
+                existingUsuario.setNombres(usuario.getNombres()); 
+                existingUsuario.setApellidos(usuario.getApellidos()); 
+                existingUsuario.setCorreo(usuario.getCorreo()); 
+                existingUsuario.setPassword(usuario.getPassword()); 
+
+                em.merge(existingUsuario); 
+                em.getTransaction().commit();
+            } else {
+                throw new Exception("Usuario no encontrado");
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void deleteUsuario(int id) throws Exception {
+    EntityManager em = emf.createEntityManager();
+    em.getTransaction().begin();
+    
+    try {
+        Usuarios usuario = em.find(Usuarios.class, id);
+        if (usuario != null) {
+            em.remove(usuario);
+            em.getTransaction().commit();
+        } else {
+            throw new Exception("Usuario no encontrado");
+        }
+    } catch (Exception e) {
+        em.getTransaction().rollback();
+        throw e;
+    } finally {
+        em.close();
+    }
+}
+
+
 
     public void close() {
         emf.close();

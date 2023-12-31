@@ -62,7 +62,9 @@ CREATE TABLE `Pagos_Facturas` (
   `Facturas_idFacturas` int NOT NULL,
   `Metodos_de_pago_idMetodos_de_pago` int NOT NULL,
   `Cantidad` int DEFAULT NULL,
-  `Usuarios_idUsuarios` int NOT NULL
+  `Usuarios_idUsuarios` int NOT NULL,
+
+  PRIMARY KEY(`Facturas_idFacturas`, `Metodos_de_pago_idMetodos_de_pago`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -113,7 +115,8 @@ CREATE TABLE `Usuarios_has_Pagos_Facturas` (
 
 CREATE TABLE `Usuarios_has_Permisos` (
   `Usuarios_idUsuarios` int NOT NULL,
-  `Permisos_idPermisos` int NOT NULL
+  `Permisos_idPermisos` int NOT NULL,
+  PRIMARY KEY (`Usuarios_idUsuarios`, `Permisos_idPermisos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -174,3 +177,10 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+/* Nuevas cosas */
+
+ALTER TABLE `Facturas`
+ADD COLUMN `estado` BOOLEAN DEFAULT TRUE;
