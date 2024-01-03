@@ -8,6 +8,8 @@ import com.cs.cajacs.controllers.UsuariosController;
 import com.cs.cajacs.modelos.Usuarios;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -306,45 +308,60 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
-        if (usuario_editar == null) {
-            String cedula = jTextCedula.getText();
-            String nombres = jTextNombres.getText();
-            String apellidos = jTextApellidos.getText();
-            String correo = jTextCorreo.getText();
-            //Contrasegna
 
-            String contra = jPassword1.getText();
-            String contra2 = jPassword2.getText();
+        String cedula = jTextCedula.getText();
+        String nombres = jTextNombres.getText();
+        String apellidos = jTextApellidos.getText();
+        String correo = jTextCorreo.getText();
+        //Contrasegna
 
-            if (cedula.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || contra.isEmpty() || contra2.isEmpty()) {
-                // Al menos uno de los campos está vacío
-                JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                if (contra.equals(contra2) && !(contra.equals(""))) {
-                    Usuarios usuario = new Usuarios();
-                    usuario.setCedula(cedula);
-                    usuario.setNombres(nombres);
-                    usuario.setCorreo(correo);
-                    usuario.setApellidos(apellidos);
-                    usuario.setPassword(contra);
+        String contra = jPassword1.getText();
+        String contra2 = jPassword2.getText();
 
+        if (cedula.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || contra.isEmpty() || contra2.isEmpty()) {
+            // Al menos uno de los campos está vacío
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (contra.equals(contra2) && !(contra.equals(""))) {
+                Usuarios usuario = new Usuarios();
+                usuario.setCedula(cedula);
+                usuario.setNombres(nombres);
+                usuario.setCorreo(correo);
+                usuario.setApellidos(apellidos);
+                usuario.setPassword(contra);
+                if (usuario_editar == null) {
                     controller_usuario.createUsuario(usuario);
                     System.out.println("USUARIO CREADO CORRECTAMENTE");
                     JOptionPane.showMessageDialog(null, "Usuario creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
-                    VistaUsuarios usuarios_ventana = new VistaUsuarios();
-                    usuarios_ventana.setVisible(true);
                 } else {
-                    if ((contra.equals(""))) {
-                        JOptionPane.showMessageDialog(null, "la contraseña no puede estar vacia.", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        System.out.println("Algo salio mal");
-                        JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
+                    try {
+                        usuario_editar.setCedula(cedula);
+                        usuario_editar.setNombres(nombres);
+                        usuario_editar.setCorreo(correo);
+                        usuario_editar.setApellidos(apellidos);
+                        //usuario_editar.setPassword(contra);
+
+                        controller_usuario.editUsuario(usuario_editar);
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(Formulario_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
+                }
+                this.dispose();
+                VistaUsuarios usuarios_ventana = new VistaUsuarios();
+                usuarios_ventana.setVisible(true);
+            } else {
+                if ((contra.equals(""))) {
+                    JOptionPane.showMessageDialog(null, "la contraseña no puede estar vacia.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println("Algo salio mal");
+                    JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-
         }
+
+
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
