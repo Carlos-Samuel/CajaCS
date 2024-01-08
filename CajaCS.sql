@@ -127,7 +127,6 @@ CREATE TABLE `Usuarios_has_Permisos` (
 -- Indices de la tabla `Pagos_Facturas`
 --
 ALTER TABLE `Pagos_Facturas`
-  ADD PRIMARY KEY (`Facturas_idFacturas`,`Metodos_de_pago_idMetodos_de_pago`),
   ADD KEY `fk_Facturas_has_Metodos_de_pago_Metodos_de_pago1_idx` (`Metodos_de_pago_idMetodos_de_pago`),
   ADD KEY `fk_Facturas_has_Metodos_de_pago_Facturas1_idx` (`Facturas_idFacturas`),
   ADD KEY `fk_Pagos_Facturas_Usuarios1_idx` (`Usuarios_idUsuarios`);
@@ -143,7 +142,6 @@ ALTER TABLE `Usuarios_has_Pagos_Facturas`
 -- Indices de la tabla `Usuarios_has_Permisos`
 --
 ALTER TABLE `Usuarios_has_Permisos`
-  ADD PRIMARY KEY (`Usuarios_idUsuarios`,`Permisos_idPermisos`),
   ADD KEY `fk_Usuarios_has_Permisos_Permisos1_idx` (`Permisos_idPermisos`),
   ADD KEY `fk_Usuarios_has_Permisos_Usuarios_idx` (`Usuarios_idUsuarios`);
 

@@ -12,6 +12,8 @@ import java.util.List;
 import com.cs.cajacs.modelos.Pagos_Facturas;
 
 import com.cs.cajacs.modelos.PagosFacturasId;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,36 @@ public class PagosFacturasController {
     }
 
     public void createPagoFactura(Pagos_Facturas pagoFactura) {
+        
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = em.getTransaction();
+            transaction.begin();
+
+            // Consulta SQL nativa para insertar
+            String sql = "INSERT INTO Pagos_Facturas (Facturas_idFacturas, Metodos_de_pago_idMetodos_de_pago, Cantidad, Usuarios_idUsuarios) VALUES (:facturaId, :metodoPagoId, :cantidad, :usuarioId)";
+            Query query = em.createNativeQuery(sql);
+            query.setParameter("facturaId", pagoFactura.getFactura().getIdFacturas());
+            query.setParameter("metodoPagoId", pagoFactura.getMetodoDePago().getIdMetodos_de_pago() );
+            query.setParameter("cantidad", pagoFactura.getCantidad());
+            query.setParameter("usuarioId", pagoFactura.getUsuario().getIdUsuarios());
+
+            query.executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void createPagoFactura2(Pagos_Facturas pagoFactura) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
@@ -40,6 +72,7 @@ public class PagosFacturasController {
             em.close();
         }
     }
+    
     
     //Esto no esta funcionando
     /*
@@ -129,8 +162,8 @@ public class PagosFacturasController {
 
         try {
             PagosFacturasId id = new PagosFacturasId();
-            id.setFacturasId((long)idFactura);
-            id.setMetodosDePagoId((long)metodoPago);
+            id.setFacturasId(idFactura);
+            id.setMetodosDePagoId(metodoPago);
 
             Pagos_Facturas existingPagosFacturas = em.find(Pagos_Facturas.class, id);
             if (existingPagosFacturas != null) {
@@ -150,7 +183,7 @@ public class PagosFacturasController {
         }
     }
 
-        public List<Pagos_Facturas> getAllPagosFacturas() {
+    public List<Pagos_Facturas> getAllPagosFacturas() {
         EntityManager em = emf.createEntityManager();
 
         try {

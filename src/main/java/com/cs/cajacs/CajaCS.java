@@ -151,9 +151,8 @@ public class CajaCS {
             */
             
             /*
-            
+           
             Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
-            
             
             Facturas factura = fcontroller.getFacturaById(1);
             
@@ -165,13 +164,28 @@ public class CajaCS {
             nuevoPagoFactura.setMetodoDePago(metodo);
             nuevoPagoFactura.setUsuario(usuario);
             nuevoPagoFactura.setCantidad(3000L);
-
-            pfcontroller.createPagoFactura(nuevoPagoFactura);
+            PagosFacturasId idPF = new PagosFacturasId(factura.getIdFacturas(), metodo.getIdMetodos_de_pago());
+            nuevoPagoFactura.setId(idPF);
             
+            System.out.println("Antes de iniciar datos");
+            System.out.println(factura.getIdFacturas());
+            System.out.println(metodo.getIdMetodos_de_pago());
+            System.out.println(usuario.getIdUsuarios());
+           
+            System.out.println("Antes de iniciar el proceso");
+            
+            try{
+                pfcontroller.createPagoFactura(nuevoPagoFactura);
+            } catch (Exception e) {
+                System.out.println("Se ha producido un error: " + e.getMessage());
+            }
+            
+            System.out.println("Despues del proceso");
             
             */
             
             
+          
             //Obtener la cantidad pagadas por medio de pago por factura
             
             /*
@@ -191,6 +205,8 @@ public class CajaCS {
             // fcontroller.anularFactura(1);
             
             //Editar pago en facturas
+            
+            /*
             
             List<Pagos_Facturas> listaPagosFacturas = pfcontroller.getAllPagosFacturas();
             
@@ -220,6 +236,7 @@ public class CajaCS {
             
             System.out.println("FIN");            
             
+            */
                                  
             
             //Esto no esta funcionando

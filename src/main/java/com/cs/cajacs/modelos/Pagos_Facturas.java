@@ -15,11 +15,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Pagos_Facturas")
-public class Pagos_Facturas implements Serializable{
-    
+public class Pagos_Facturas implements Serializable {
+
     @EmbeddedId
     private PagosFacturasId id;
-    
+
     @ManyToOne
     @MapsId("facturasId")
     @JoinColumn(name = "Facturas_idFacturas")
@@ -31,15 +31,31 @@ public class Pagos_Facturas implements Serializable{
     private Metodos_de_pago metodoDePago;
 
     @Column(name = "Cantidad")
-    private Long Cantidad;
+    private Long cantidad;
 
     @ManyToOne
     @JoinColumn(name = "Usuarios_idUsuarios")
     private Usuarios usuario;
 
-    public Pagos_Facturas() {}
+    public Pagos_Facturas() {
+    }
 
-    // Getters y Setters
+    public Pagos_Facturas(PagosFacturasId id, Facturas factura, Metodos_de_pago metodoDePago, Long cantidad, Usuarios usuario) {
+        this.id = id;
+        this.factura = factura;
+        this.metodoDePago = metodoDePago;
+        this.cantidad = cantidad;
+        this.usuario = usuario;
+    }
+
+    public PagosFacturasId getId() {
+        return id;
+    }
+
+    public void setId(PagosFacturasId id) {
+        this.id = id;
+    }
+
     public Facturas getFactura() {
         return factura;
     }
@@ -57,11 +73,11 @@ public class Pagos_Facturas implements Serializable{
     }
 
     public Long getCantidad() {
-        return Cantidad;
+        return cantidad;
     }
 
-    public void setCantidad(Long Cantidad) {
-        this.Cantidad = Cantidad;
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
     }
 
     public Usuarios getUsuario() {
@@ -71,21 +87,20 @@ public class Pagos_Facturas implements Serializable{
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
-
-    public PagosFacturasId getId() {
-        return id;
-    }
-
-    public void setId(PagosFacturasId id) {
-        this.id = id;
-    }
+    
+    
 
     @Override
     public String toString() {
-        return ", Cantidad=" + Cantidad + ", usuario=" + usuario;
+        return "Pagos_Facturas{" +
+               "id=" + id +
+               ", facturaId=" + (factura != null ? factura.getIdFacturas() : "null") +
+               ", metodoDePagoId=" + (metodoDePago != null ? metodoDePago.getIdMetodos_de_pago() : "null") +
+               ", cantidad=" + cantidad +
+               ", usuarioId=" + (usuario != null ? usuario.getIdUsuarios() : "null") +
+               '}';
     }
-    
-    
-    
+
 }
+
 
