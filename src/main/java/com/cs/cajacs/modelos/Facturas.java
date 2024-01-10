@@ -60,6 +60,9 @@ public class Facturas {
         this.idFacturas = idFacturas;
     }
 
+    public void setFacturasId(int idFacturas) {
+        this.idFacturas = idFacturas;
+    }
     public String getPrefijo() {
         return Prefijo;
     }

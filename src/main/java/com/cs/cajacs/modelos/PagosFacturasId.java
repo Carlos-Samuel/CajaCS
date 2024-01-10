@@ -4,13 +4,8 @@
  */
 package com.cs.cajacs.modelos;
 
+import java.util.Objects;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Table;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
 import javax.persistence.Embeddable;
 
 /**
@@ -19,10 +14,10 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class PagosFacturasId implements Serializable {
-    private Long facturasId; 
-    private Long metodosDePagoId;
+    private int facturasId; 
+    private int metodosDePagoId;
 
-    public PagosFacturasId(Long facturasId, Long metodosDePagoId) {
+    public PagosFacturasId(int facturasId, int metodosDePagoId) {
         this.facturasId = facturasId;
         this.metodosDePagoId = metodosDePagoId;
     }
@@ -30,20 +25,50 @@ public class PagosFacturasId implements Serializable {
     public PagosFacturasId() {
     }
 
-    public Long getFacturasId() {
+    public int getFacturasId() {
         return facturasId;
     }
 
-    public void setFacturasId(Long facturasId) {
+    public void setFacturasId(int facturasId) {
         this.facturasId = facturasId;
     }
 
-    public Long getMetodosDePagoId() {
+    public int getMetodosDePagoId() {
         return metodosDePagoId;
     }
 
-    public void setMetodosDePagoId(Long metodosDePagoId) {
+    public void setMetodosDePagoId(int metodosDePagoId) {
         this.metodosDePagoId = metodosDePagoId;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.facturasId);
+        hash = 59 * hash + Objects.hashCode(this.metodosDePagoId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PagosFacturasId other = (PagosFacturasId) obj;
+        if (!Objects.equals(this.metodosDePagoId, other.metodosDePagoId)) {
+            return false;
+        }
+        
+        if (!Objects.equals(this.facturasId, other.facturasId)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
