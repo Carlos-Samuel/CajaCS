@@ -242,18 +242,18 @@ public class CajaCS {
             //Esto no esta funcionando
             
             
-            /*
+            
             
             System.out.println("INICIO Pagos");
             
-            List<Pagos_Facturas> lista_Pagos_Facturas = pfcontroller.obtenerPagosPorFacturaId(1);
+          //  List<Pagos_Facturas> lista_Pagos_Facturas = pfcontroller.obtenerPagosPorFacturaId(1);
 
-            for (Pagos_Facturas pago_factura : lista_Pagos_Facturas) {
-                System.out.println("ID de Factura: " + pago_factura.getFactura().getNumFactura());
-                System.out.println("Metodo de pago: " + pago_factura.getMetodoDePago().getDescripcion());
-                System.out.println("Monto: " + pago_factura.getCantidad());
-            }
-            
+//            for (Pagos_Facturas pago_factura : lista_Pagos_Facturas) {
+//                System.out.println("ID de Factura: " + pago_factura.getFactura().getNumFactura());
+//                System.out.println("Metodo de pago: " + pago_factura.getMetodoDePago().getDescripcion());
+//                System.out.println("Monto: " + pago_factura.getCantidad());
+//            }
+//            
             System.out.println("FIN Pagos");
 
            
@@ -266,7 +266,7 @@ public class CajaCS {
             
             System.out.println(pfcontroller.calcularSaldoPendiente(1));   
 
-             */
+           
 
     }
 }
