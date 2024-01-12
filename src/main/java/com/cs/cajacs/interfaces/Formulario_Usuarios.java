@@ -80,7 +80,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextNombres.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jTextNombres.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextNombresActionPerformed(evt);
@@ -90,7 +90,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel4.setText("Cedula:");
 
-        jTextCedula.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jTextCedula.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCedulaActionPerformed(evt);
@@ -100,7 +100,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel5.setText("Nombres:");
 
-        jTextApellidos.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jTextApellidos.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextApellidosActionPerformed(evt);
@@ -110,7 +110,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel6.setText("Apellidos:");
 
-        jTextCorreo.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        jTextCorreo.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCorreoActionPerformed(evt);
@@ -120,6 +120,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel7.setText("Correo Electronico:");
 
+        jPassword1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPassword1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPassword1ActionPerformed(evt);
@@ -129,6 +130,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel8.setText("Contraseña:");
 
+        jPassword2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPassword2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPassword2ActionPerformed(evt);
@@ -154,10 +156,10 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(264, 264, 264)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,17 +185,17 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(274, 274, 274)
                 .addComponent(jLabel2)
-                .addGap(170, 170, 170))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addComponent(jLabel2)
-                .addGap(16, 16, 16))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -255,11 +257,11 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

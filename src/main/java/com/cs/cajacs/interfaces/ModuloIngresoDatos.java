@@ -88,7 +88,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         System.out.println(factura);
         System.out.println("SI YA IMPREME");
         //VALORES ABONADOS
-        int valor_abonado = pfcontroller.obtenerAbonadoFacturaId(id_factura);
+        //int valor_abonado = pfcontroller.obtenerAbonadoFacturaId(id_factura);
 //
 //        System.out.println("Faltante:");
 //        int valor_pendiente = pfcontroller.calcularSaldoPendiente(id_factura);
@@ -96,13 +96,13 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
 //        System.out.println();
 //        VALORES ABONADOS FIN
 //
-//        System.out.println(factura.getPrefijo());
-//        jTextPrefijo.setText(factura.getPrefijo());
-//        jTextNumero.setText(factura.getNumFactura());
-//        jTextValorPendiente.setText(valor_pendiente_cadena);
-//
-//        int valor = factura.getValorFactura();
-//        jTextValorTotal.setText(String.valueOf(valor));
+        System.out.println(factura.getPrefijo());
+        jTextPrefijo.setText(factura.getPrefijo());
+        jTextNumero.setText(factura.getNumFactura());
+        //jTextValorPendiente.setText(valor_pendiente_cadena);
+
+        int valor = factura.getValorFactura();
+        jTextValorTotal.setText(String.valueOf(valor));
 
     }
 
