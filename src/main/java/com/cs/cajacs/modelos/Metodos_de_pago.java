@@ -30,6 +30,9 @@ public class Metodos_de_pago {
 
     @Column(name = "Imagen")
     private String Imagen;
+    
+    @Column(name = "Activo", nullable = false)
+    private Boolean Activo = true;
 
     public Metodos_de_pago() {}
 
@@ -64,5 +67,13 @@ public class Metodos_de_pago {
 
     public void setImagen(String Imagen) {
         this.Imagen = Imagen;
+    }
+    
+     public Boolean getActivo() {
+        return Activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.Activo = activo;
     }
 }

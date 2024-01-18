@@ -115,7 +115,7 @@ public class PagosFacturasController {
         Long sumaTotal = 0L;
         try {
             TypedQuery<Long> query = em.createQuery(
-                    "SELECT pf.Cantidad FROM Pagos_Facturas pf WHERE pf.factura.id = : facturaId AND pf.metodoDePago.id = : metodoDePago ", Long.class);
+                    "SELECT pf.cantidad FROM Pagos_Facturas pf WHERE pf.factura.id = : facturaId AND pf.metodoDePago.id = : metodoDePago ", Long.class);
             query.setParameter("facturaId", facturaId);
             query.setParameter("metodoDePago", idMetodos_de_pago);
 

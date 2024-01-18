@@ -22,6 +22,20 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+-- Desactivar restricciones de clave externa
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Eliminar las tablas si existen
+DROP TABLE IF EXISTS `Facturas`;
+DROP TABLE IF EXISTS `Metodos_de_pago`;
+DROP TABLE IF EXISTS `Pagos_Facturas`;
+DROP TABLE IF EXISTS `Permisos`;
+DROP TABLE IF EXISTS `Usuarios`;
+DROP TABLE IF EXISTS `Usuarios_has_Pagos_Facturas`;
+DROP TABLE IF EXISTS `Usuarios_has_Permisos`;
+
+-- Activar restricciones de clave externa
+SET FOREIGN_KEY_CHECKS = 1;
 
 --
 -- Estructura de tabla para la tabla `Facturas`
@@ -35,6 +49,7 @@ CREATE TABLE `Facturas` (
   `Terminado` tinyint DEFAULT NULL,
   `fechaRegistrada` datetime DEFAULT NULL,
   `fechaTerminada` datetime DEFAULT NULL,
+  `estado` BOOLEAN DEFAULT TRUE,
   PRIMARY KEY (`idFacturas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -48,7 +63,8 @@ CREATE TABLE `Metodos_de_pago` (
   `idMetodos_de_pago` int NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(45) DEFAULT NULL,
   `Cuenta` varchar(45) DEFAULT NULL,
-  `Imagen` varchar(45) DEFAULT NULL,
+  `Imagen` varchar(150) DEFAULT NULL,
+  `Activo` BOOLEAN DEFAULT TRUE,
   PRIMARY KEY (`idMetodos_de_pago`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -176,9 +192,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-
-
-/* Nuevas cosas */
-
-ALTER TABLE `Facturas`
-ADD COLUMN `estado` BOOLEAN DEFAULT TRUE;
