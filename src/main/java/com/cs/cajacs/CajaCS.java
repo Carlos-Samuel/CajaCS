@@ -138,9 +138,11 @@ public class CajaCS {
             
             System.out.println("FIN");
             
+
          */
  /*
            
+
             Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
             
             Facturas factura = fcontroller.getFacturaById(1);
@@ -170,10 +172,12 @@ public class CajaCS {
             }
             
             System.out.println("Despues del proceso");
+
             
          */
         //Obtener la cantidad pagadas por medio de pago por factura
         /*
+
             
             int cantidad = pfcontroller.obtenerAbonadoMedioPagoFacturaId(1, 1);
             
@@ -222,31 +226,38 @@ public class CajaCS {
             
             System.out.println("FIN");            
             
+
          */
         //Esto no esta funcionando
         /*
-            
-            System.out.println("INICIO Pagos");
-            
-            List<Pagos_Facturas> lista_Pagos_Facturas = pfcontroller.obtenerPagosPorFacturaId(1);
 
-            for (Pagos_Facturas pago_factura : lista_Pagos_Facturas) {
-                System.out.println("ID de Factura: " + pago_factura.getFactura().getNumFactura());
-                System.out.println("Metodo de pago: " + pago_factura.getMetodoDePago().getDescripcion());
-                System.out.println("Monto: " + pago_factura.getCantidad());
-            }
-            
-            System.out.println("FIN Pagos");
-
-           
-            
-            System.out.println("Abonado:");
             
             System.out.println(pfcontroller.obtenerAbonadoFacturaId(1));
-        
-            System.out.println("Faltante:");
+            System.out.println("INICIO Pagos");
             
-            System.out.println(pfcontroller.calcularSaldoPendiente(1));   
+          //  List<Pagos_Facturas> lista_Pagos_Facturas = pfcontroller.obtenerPagosPorFacturaId(1);
+
+//            for (Pagos_Facturas pago_factura : lista_Pagos_Facturas) {
+//                System.out.println("ID de Factura: " + pago_factura.getFactura().getNumFactura());
+//                System.out.println("Metodo de pago: " + pago_factura.getMetodoDePago().getDescripcion());
+//                System.out.println("Monto: " + pago_factura.getCantidad());
+//            }
+//            
+//            System.out.println("FIN Pagos");
+//
+//           
+//            
+//            System.out.println("Abonado:");
+//            
+//            System.out.println(pfcontroller.obtenerAbonadoFacturaId(1));
+//        
+//            System.out.println("Faltante:");
+//            
+//            System.out.println(pfcontroller.calcularSaldoPendiente(1));   
+
+           
+
+
 
          */
  /*
@@ -331,6 +342,7 @@ public class CajaCS {
         //CARGAR IMAGEN MEDIO DE PAGO
         File inputFile = new File("D:\\Desktop\\nequi.png");
         String Imagen = mcontroller.guardarImagenMetodoDePago(inputFile);
+
 
         //El metodo anterior devuelve el nombre de la imagen y lo debo enviar
         //en el create del metodo de pago para que lo guarde en la DB

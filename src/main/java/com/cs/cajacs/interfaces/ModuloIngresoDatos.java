@@ -14,10 +14,13 @@ import com.cs.cajacs.modelos.Pagos_Facturas;
 import com.cs.cajacs.modelos.Usuarios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,35 +38,43 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
     private FacturasController controller_factura = new FacturasController();
     PagosFacturasController pfcontroller = new PagosFacturasController();
 //    PagosFacturasController controller_pago_factura = new PagosFacturasController();
-    
+
     private UsuariosController controller_usuario = new UsuariosController();
     Facturas factura = null;
-    private int id_metodo ;
-    private int id_factura;
+    private int id_metodo = 0;
+    private int id_factura = 0;
+
     public ModuloIngresoDatos() {
         initComponents();
         botones = new ArrayList<JButton>();
         indice = 0;
-        
-        
+        cerrar();
 //        MetodosDePagoController controller = new MetodosDePagoController();
         List<Metodos_de_pago> prueba = controller.getAllMetodosDePago();
         for (int i = 0; i < prueba.size(); i++) {
-        
+
             Metodos_de_pago metodo = prueba.get(i);
 //            System.out.println(metodo.getIdMetodos_de_pago());
 //            System.out.println();
 //        
 //        
 //            System.out.println("hola");
-            JButton boton = new JButton(metodo.getDescripcion() + ' '+ indice) ;
-            
+            JButton boton = new JButton(metodo.getDescripcion() + ' ' + indice);
+
             boton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Cambiar el texto del JTextField al hacer clic en el botón
                     jLabel8.setText(metodo.getDescripcion());
                     id_metodo = metodo.getIdMetodos_de_pago();
+                    System.out.println("AQUIII");
+                    if (id_metodo != 0 && id_factura != 0) {
+
+                        int abonado = pfcontroller.obtenerAbonadoMedioPagoFacturaId(id_factura, id_metodo);
+                        System.out.println(abonado);
+                        jText_valor.setText(String.valueOf(abonado));
+                    }
+
                 }
             });
             Panel.add(boton);
@@ -72,36 +83,57 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             Panel.updateUI();
         }
         //controller.close();
-}
+    }
+    public void cerrar() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-    public void actualizar_campos(){
+            addWindowListener(
+                    new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    cambiar();
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void cambiar() {
+        ModuloDashboard vista = new ModuloDashboard();
+        this.dispose();
+        vista.setVisible(true);
+    }
+
+    public void actualizar_campos() {
         id_factura = 1;
         factura = controller_factura.getFacturaById(id_factura);
+        System.out.println(factura);
+        System.out.println("SI YA IMPREME");
         //VALORES ABONADOS
-        int valor_abonado = pfcontroller.obtenerAbonadoFacturaId(id_factura);
-        
-        System.out.println("Faltante:");
-        int valor_pendiente = pfcontroller.calcularSaldoPendiente(id_factura);
-        String valor_pendiente_cadena = String.valueOf(valor_pendiente);
-        System.out.println();   
-        //VALORES ABONADOS FIN
-        
-        
-        
+        //int valor_abonado = pfcontroller.obtenerAbonadoFacturaId(id_factura);
+//
+//        System.out.println("Faltante:");
+//        int valor_pendiente = pfcontroller.calcularSaldoPendiente(id_factura);
+//        String valor_pendiente_cadena = String.valueOf(valor_pendiente);
+//        System.out.println();
+//        VALORES ABONADOS FIN
+//
         System.out.println(factura.getPrefijo());
         jTextPrefijo.setText(factura.getPrefijo());
         jTextNumero.setText(factura.getNumFactura());
-        jTextValorPendiente.setText(valor_pendiente_cadena);
-        
+        //jTextValorPendiente.setText(valor_pendiente_cadena);
+
         int valor = factura.getValorFactura();
-        jTextValorTotal.setText( String.valueOf(valor));
-    
-    
-    
+        jTextValorTotal.setText(String.valueOf(valor));
+
     }
+
     /**
-     * 
-     * 
+     *
+     *
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
@@ -196,7 +228,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTextValorPendiente.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
@@ -231,7 +263,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(17, 17, 17))
         );
@@ -282,7 +314,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(154, 154, 154)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,80 +331,102 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
+                        .addComponent(jLabel3)
+                        .addGap(121, 121, 121)
+                        .addComponent(jTextPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(54, 54, 54)
+                        .addComponent(jTextNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(95, 95, 95))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(41, 41, 41)
+                                .addComponent(jTextValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(42, 42, 42)
+                                .addComponent(jTextValorPendiente, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(117, 117, 117)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jText_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(228, 228, 228)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel7))
-                            .addGap(41, 41, 41)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextPrefijo)
-                                .addComponent(jTextNumero)
-                                .addComponent(jTextValorTotal)
-                                .addComponent(jTextValorPendiente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(162, 162, 162)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jText_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel5)
-                        .addComponent(jScrollPane1))
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jText_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8))
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextValorPendiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1)
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel3))
+                            .addComponent(jTextPrefijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel4))
+                            .addComponent(jTextNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jTextValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextValorPendiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jText_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -388,73 +442,71 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
-       int id_usuario = 1;
-        
+        int id_usuario = 1;
+
         String valor = jText_valor.getText();
-        
-        if (!valor.equals("")){
-            
-            
-        System.out.println(id_metodo);
-        System.out.println(valor);
-        Long numero = null;
-        try {
-             numero = Long.parseLong(valor);
-            System.out.println("El número convertido es: " + numero);
-        } catch (NumberFormatException e) {
-            System.out.println("No se puede convertir a entero. Formato no válido.");
-        }
-        
+
+        if (!valor.equals("")) {
+
+            System.out.println(id_metodo);
+            System.out.println(valor);
+            Long numero = null;
+            try {
+                numero = Long.parseLong(valor);
+                System.out.println("El número convertido es: " + numero);
+            } catch (NumberFormatException e) {
+                System.out.println("No se puede convertir a entero. Formato no válido.");
+            }
 
             // Crear un nuevo pago de factura
-        Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
-        // Configura los objetos Facturas, Metodos_de_pago y Usuarios según tus necesidades
-       
-        //buscamos la factura
-        Metodos_de_pago metodoDePago = controller.getMetodoDePagoById(id_metodo);
-        //controller.close();
-        Usuarios usuario = controller_usuario.getUsuarioById(id_usuario);
-        //controller_usuario.close();
+            Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
+            // Configura los objetos Facturas, Metodos_de_pago y Usuarios según tus necesidades
 
-        nuevoPagoFactura.setFactura(factura);
-        nuevoPagoFactura.setMetodoDePago(metodoDePago);
-        nuevoPagoFactura.setUsuario(usuario);
-        nuevoPagoFactura.setCantidad(numero); // Cantidad de pago
+            //buscamos la factura
+            System.out.println("METODO DE PAGO ES " + id_metodo);
+            Metodos_de_pago metodoDePago = controller.getMetodoDePagoById(id_metodo);
+            System.out.println(metodoDePago);
+            Usuarios usuario = controller_usuario.getUsuarioById(id_usuario);
+            System.out.println(usuario);
 
-        pfcontroller.createPagoFactura(nuevoPagoFactura);
-        
-        
-        jText_valor.setText("");
-        //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);
-        JOptionPane.showMessageDialog(null, "Registrado correctamente", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
-        actualizar_campos();
-        }else{
-            JOptionPane.showMessageDialog(null,"ingrese el monto del metodo de pago.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            nuevoPagoFactura.setFactura(factura);
+            nuevoPagoFactura.setMetodoDePago(metodoDePago);
+            nuevoPagoFactura.setUsuario(usuario);
+            nuevoPagoFactura.setCantidad(numero); // Cantidad de pago
+            System.out.println(numero);
+            pfcontroller.createPagoFactura(nuevoPagoFactura);
+             System.out.println("AQUI VAMOS BIEN");
+            jText_valor.setText("");
+            //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);
+            JOptionPane.showMessageDialog(null, "Registrado correctamente", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
+            actualizar_campos();
+        } else {
+            JOptionPane.showMessageDialog(null, "ingrese el monto del metodo de pago.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
-                dispose();
-        
+        dispose();
+
         ModuloDashboard nuevaVentana = new ModuloDashboard();
         nuevaVentana.setVisible(true);
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
-                
+
 //        ModuloDashboard nuevaVentana = new ModuloDashboard();
 //        nuevaVentana.setVisible(true);
-            String mensaje = "HOLA";
-           JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.ERROR_MESSAGE);
+        String mensaje = "HOLA";
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         // TODO add your handling code here:
-           actualizar_campos();
-            
+        actualizar_campos();
+
 //        System.out.println("hola");
 //        JButton boton = new JButton("BOTON" + indice) ;
 //        Panel.add(boton);
