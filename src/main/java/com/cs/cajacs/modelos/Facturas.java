@@ -32,7 +32,7 @@ public class Facturas {
     private String NumFactura;
 
     @Column(name = "ValorFactura")
-    private String ValorFactura;
+    private Integer ValorFactura;
 
     @Column(name = "Terminado")
     private Boolean Terminado;
@@ -44,6 +44,10 @@ public class Facturas {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fechaTerminada")
     private Date fechaTerminada;
+    
+    @Column(name = "estado", nullable = false)
+    private Boolean estado = true;
+
 
     public Facturas() {}
 
@@ -56,6 +60,9 @@ public class Facturas {
         this.idFacturas = idFacturas;
     }
 
+    public void setFacturasId(int idFacturas) {
+        this.idFacturas = idFacturas;
+    }
     public String getPrefijo() {
         return Prefijo;
     }
@@ -72,11 +79,11 @@ public class Facturas {
         this.NumFactura = NumFactura;
     }
 
-    public String getValorFactura() {
+    public Integer getValorFactura() {
         return ValorFactura;
     }
 
-    public void setValorFactura(String ValorFactura) {
+    public void setValorFactura(Integer ValorFactura) {
         this.ValorFactura = ValorFactura;
     }
 
@@ -103,5 +110,17 @@ public class Facturas {
     public void setFechaTerminada(Date fechaTerminada) {
         this.fechaTerminada = fechaTerminada;
     }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+    
+    
+    
+    
 }
 

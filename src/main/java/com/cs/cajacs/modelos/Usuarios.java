@@ -91,6 +91,11 @@ public class Usuarios {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "idUsuarios=" + idUsuarios + ", cedula=" + cedula + ", nombres=" + nombres + ", apellidos=" + apellidos + ", correo=" + correo + ", password=" + password;
+    }
     
     
 

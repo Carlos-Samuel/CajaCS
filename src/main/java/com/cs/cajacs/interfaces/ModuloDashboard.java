@@ -134,8 +134,8 @@ public class ModuloDashboard extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
+        VistaConsolidadoVentasMedioPago nuevaVentana = new VistaConsolidadoVentasMedioPago();
         
-        ModuloIngresoDatos nuevaVentana = new ModuloIngresoDatos();
         nuevaVentana.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -160,6 +160,9 @@ public class ModuloDashboard extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        VistaMetodosPago m = new VistaMetodosPago();
+        m.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

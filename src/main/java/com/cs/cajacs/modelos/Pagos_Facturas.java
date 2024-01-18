@@ -5,12 +5,7 @@
 package com.cs.cajacs.modelos;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Table;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 /**
  *
@@ -20,28 +15,47 @@ import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "Pagos_Facturas")
-public class Pagos_Facturas implements Serializable{
-    @Id
+public class Pagos_Facturas implements Serializable {
+
+    @EmbeddedId
+    private PagosFacturasId id;
+
     @ManyToOne
+    @MapsId("facturasId")
     @JoinColumn(name = "Facturas_idFacturas")
     private Facturas factura;
 
-    @Id
     @ManyToOne
+    @MapsId("metodosDePagoId")
     @JoinColumn(name = "Metodos_de_pago_idMetodos_de_pago")
     private Metodos_de_pago metodoDePago;
 
     @Column(name = "Cantidad")
-    private Integer Cantidad;
+    private Long cantidad;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "Usuarios_idUsuarios")
     private Usuarios usuario;
 
-    public Pagos_Facturas() {}
+    public Pagos_Facturas() {
+    }
 
-    // Getters y Setters
+    public Pagos_Facturas(PagosFacturasId id, Facturas factura, Metodos_de_pago metodoDePago, Long cantidad, Usuarios usuario) {
+        this.id = id;
+        this.factura = factura;
+        this.metodoDePago = metodoDePago;
+        this.cantidad = cantidad;
+        this.usuario = usuario;
+    }
+
+    public PagosFacturasId getId() {
+        return id;
+    }
+
+    public void setId(PagosFacturasId id) {
+        this.id = id;
+    }
+
     public Facturas getFactura() {
         return factura;
     }
@@ -58,12 +72,12 @@ public class Pagos_Facturas implements Serializable{
         this.metodoDePago = metodoDePago;
     }
 
-    public Integer getCantidad() {
-        return Cantidad;
+    public Long getCantidad() {
+        return cantidad;
     }
 
-    public void setCantidad(Integer Cantidad) {
-        this.Cantidad = Cantidad;
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
     }
 
     public Usuarios getUsuario() {
@@ -73,5 +87,20 @@ public class Pagos_Facturas implements Serializable{
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
+    
+    
+
+    @Override
+    public String toString() {
+        return "Pagos_Facturas{" +
+               "id=" + id +
+               ", facturaId=" + (factura != null ? factura.getIdFacturas() : "null") +
+               ", metodoDePagoId=" + (metodoDePago != null ? metodoDePago.getIdMetodos_de_pago() : "null") +
+               ", cantidad=" + cantidad +
+               ", usuarioId=" + (usuario != null ? usuario.getIdUsuarios() : "null") +
+               '}';
+    }
+
 }
+
 

@@ -62,7 +62,9 @@ CREATE TABLE `Pagos_Facturas` (
   `Facturas_idFacturas` int NOT NULL,
   `Metodos_de_pago_idMetodos_de_pago` int NOT NULL,
   `Cantidad` int DEFAULT NULL,
-  `Usuarios_idUsuarios` int NOT NULL
+  `Usuarios_idUsuarios` int NOT NULL,
+
+  PRIMARY KEY(`Facturas_idFacturas`, `Metodos_de_pago_idMetodos_de_pago`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -113,7 +115,8 @@ CREATE TABLE `Usuarios_has_Pagos_Facturas` (
 
 CREATE TABLE `Usuarios_has_Permisos` (
   `Usuarios_idUsuarios` int NOT NULL,
-  `Permisos_idPermisos` int NOT NULL
+  `Permisos_idPermisos` int NOT NULL,
+  PRIMARY KEY (`Usuarios_idUsuarios`, `Permisos_idPermisos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -124,7 +127,6 @@ CREATE TABLE `Usuarios_has_Permisos` (
 -- Indices de la tabla `Pagos_Facturas`
 --
 ALTER TABLE `Pagos_Facturas`
-  ADD PRIMARY KEY (`Facturas_idFacturas`,`Metodos_de_pago_idMetodos_de_pago`),
   ADD KEY `fk_Facturas_has_Metodos_de_pago_Metodos_de_pago1_idx` (`Metodos_de_pago_idMetodos_de_pago`),
   ADD KEY `fk_Facturas_has_Metodos_de_pago_Facturas1_idx` (`Facturas_idFacturas`),
   ADD KEY `fk_Pagos_Facturas_Usuarios1_idx` (`Usuarios_idUsuarios`);
@@ -140,7 +142,6 @@ ALTER TABLE `Usuarios_has_Pagos_Facturas`
 -- Indices de la tabla `Usuarios_has_Permisos`
 --
 ALTER TABLE `Usuarios_has_Permisos`
-  ADD PRIMARY KEY (`Usuarios_idUsuarios`,`Permisos_idPermisos`),
   ADD KEY `fk_Usuarios_has_Permisos_Permisos1_idx` (`Permisos_idPermisos`),
   ADD KEY `fk_Usuarios_has_Permisos_Usuarios_idx` (`Usuarios_idUsuarios`);
 
@@ -174,3 +175,10 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+/* Nuevas cosas */
+
+ALTER TABLE `Facturas`
+ADD COLUMN `estado` BOOLEAN DEFAULT TRUE;

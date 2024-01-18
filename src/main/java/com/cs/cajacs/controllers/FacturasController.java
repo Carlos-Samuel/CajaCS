@@ -58,6 +58,28 @@ public class FacturasController {
             em.close();
         }
     }
+    
+    public void anularFactura(int id) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        try {
+            Facturas factura = em.find(Facturas.class, id);
+            if (factura != null) {
+                factura.setEstado(false);
+                em.merge(factura);
+                em.getTransaction().commit();
+            } else {
+                // Manejar el caso en que no se encuentra la factura
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
 
     public void close() {
         emf.close();
