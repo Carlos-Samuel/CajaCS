@@ -4,6 +4,10 @@
  */
 package com.cs.cajacs.interfaces;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author kuchi
@@ -15,10 +19,32 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
      */
     public VistaConsolidadoVentasMedioPago() {
         initComponents();
+        cerrar();
     }
 
     
-    
+    public void cerrar() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+            addWindowListener(
+                    new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    cambiar();
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void cambiar() {
+        ModuloDashboard vista = new ModuloDashboard();
+        this.dispose();
+        vista.setVisible(true);
+    }
     
     
     /**

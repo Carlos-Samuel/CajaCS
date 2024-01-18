@@ -14,10 +14,13 @@ import com.cs.cajacs.modelos.Pagos_Facturas;
 import com.cs.cajacs.modelos.Usuarios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +48,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         initComponents();
         botones = new ArrayList<JButton>();
         indice = 0;
-
+        cerrar();
 //        MetodosDePagoController controller = new MetodosDePagoController();
         List<Metodos_de_pago> prueba = controller.getAllMetodosDePago();
         for (int i = 0; i < prueba.size(); i++) {
@@ -80,6 +83,28 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             Panel.updateUI();
         }
         //controller.close();
+    }
+    public void cerrar() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+            addWindowListener(
+                    new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    cambiar();
+                }
+
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void cambiar() {
+        ModuloDashboard vista = new ModuloDashboard();
+        this.dispose();
+        vista.setVisible(true);
     }
 
     public void actualizar_campos() {
@@ -449,7 +474,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
             nuevoPagoFactura.setUsuario(usuario);
             nuevoPagoFactura.setCantidad(numero); // Cantidad de pago
             System.out.println(numero);
-            //pfcontroller.createPagoFactura(nuevoPagoFactura);
+            pfcontroller.createPagoFactura(nuevoPagoFactura);
              System.out.println("AQUI VAMOS BIEN");
             jText_valor.setText("");
             //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);

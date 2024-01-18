@@ -150,8 +150,10 @@ public class CajaCS {
             
             */
             
-            /*
-           
+            
+           /*
+            
+            
             Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
             
             Facturas factura = fcontroller.getFacturaById(1);
@@ -181,8 +183,8 @@ public class CajaCS {
             }
             
             System.out.println("Despues del proceso");
-            
             */
+            
             
             
           
@@ -243,7 +245,7 @@ public class CajaCS {
             
             
             
-            
+            System.out.println(pfcontroller.obtenerAbonadoFacturaId(1));
             System.out.println("INICIO Pagos");
             
           //  List<Pagos_Facturas> lista_Pagos_Facturas = pfcontroller.obtenerPagosPorFacturaId(1);
@@ -254,17 +256,17 @@ public class CajaCS {
 //                System.out.println("Monto: " + pago_factura.getCantidad());
 //            }
 //            
-            System.out.println("FIN Pagos");
-
-           
-            
-            System.out.println("Abonado:");
-            
-            System.out.println(pfcontroller.obtenerAbonadoFacturaId(1));
-        
-            System.out.println("Faltante:");
-            
-            System.out.println(pfcontroller.calcularSaldoPendiente(1));   
+//            System.out.println("FIN Pagos");
+//
+//           
+//            
+//            System.out.println("Abonado:");
+//            
+//            System.out.println(pfcontroller.obtenerAbonadoFacturaId(1));
+//        
+//            System.out.println("Faltante:");
+//            
+//            System.out.println(pfcontroller.calcularSaldoPendiente(1));   
 
            
 
