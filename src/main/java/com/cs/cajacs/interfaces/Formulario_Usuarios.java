@@ -332,9 +332,9 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 usuario.setApellidos(apellidos);
                 usuario.setPassword(contra);
                 if (usuario_editar == null) {
-                    controller_usuario.createUsuario(usuario);
-                    System.out.println("USUARIO CREADO CORRECTAMENTE");
-                    JOptionPane.showMessageDialog(null, "Usuario creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    String mensaje = controller_usuario.createUsuario(usuario);
+                    System.out.println(mensaje);
+                    JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     try {
                         usuario_editar.setCedula(cedula);

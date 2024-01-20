@@ -95,6 +95,15 @@ CREATE TABLE `Permisos` (
   PRIMARY KEY (`idPermisos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Insercion de permisos
+--
+INSERT INTO `Permisos` (`Descripcion`) VALUES ('Registrar facturas y pagos');
+INSERT INTO `Permisos` (`Descripcion`) VALUES ('Informe 1');
+INSERT INTO `Permisos` (`Descripcion`) VALUES ('Informe 2');
+INSERT INTO `Permisos` (`Descripcion`) VALUES ('Informe 3');
+INSERT INTO `Permisos` (`Descripcion`) VALUES ('Formas de pago');
+INSERT INTO `Permisos` (`Descripcion`) VALUES ('Manejo de usuarios y  permisos');
 -- --------------------------------------------------------
 
 --
@@ -108,7 +117,9 @@ CREATE TABLE `Usuarios` (
   `Apellidos` varchar(45) DEFAULT NULL,
   `Correo` varchar(45) DEFAULT NULL,
   `Password` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`idUsuarios`)
+  PRIMARY KEY (`idUsuarios`),
+  UNIQUE KEY `Correo_UNIQUE` (`Correo`) ,
+  UNIQUE KEY `Cedula_UNIQUE` (`Cedula`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
