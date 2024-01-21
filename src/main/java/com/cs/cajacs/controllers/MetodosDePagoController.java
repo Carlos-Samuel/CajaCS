@@ -95,6 +95,7 @@ public class MetodosDePagoController {
 
                 existingMetodo.setDescripcion(metodo.getDescripcion());
                 existingMetodo.setCuenta(metodo.getCuenta());
+                existingMetodo.setImagen(metodo.getImagen());
 
                 em.merge(existingMetodo);
                 em.getTransaction().commit();
@@ -131,7 +132,7 @@ public class MetodosDePagoController {
             em.close();
         }
     }
-    
+
     public String guardarImagenMetodoDePago(File inputFile) {
         try {
             // Ruta del directorio actual del proyecto
@@ -172,7 +173,7 @@ public class MetodosDePagoController {
         if (ultimoPunto != -1) {
             return nombreArchivo.substring(ultimoPunto + 1);
         } else {
-            return ""; 
+            return "";
         }
     }
 
@@ -185,4 +186,39 @@ public class MetodosDePagoController {
         return DigestUtils.sha256Hex(fechaHoraFormateada);
     }
 
+    public String editarImagenMetodoDePago(String nombreArchivoActual, File nuevoArchivo) {
+        try {
+            // Ruta del directorio actual del proyecto
+            String directorioProyecto = System.getProperty("user.dir");
+
+            // Ruta completa del archivo actual
+            String rutaArchivoActual = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + nombreArchivoActual;
+
+            // Verifica si el archivo actual existe
+            File archivoActual = new File(rutaArchivoActual);
+            if (archivoActual.exists()) {
+                // Obtiene el nombre y la extensión del nuevo archivo
+                String nombreNuevo = generarNombreUnico();
+                String extensionNuevo = obtenerExtension(nuevoArchivo);
+                String nombreCompletoNuevo = nombreNuevo + "." + extensionNuevo;
+
+                // Ruta completa del nuevo archivo
+                String rutaNuevoArchivo = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + nombreCompletoNuevo;
+
+                // Copia el contenido del nuevo archivo al archivo actual
+                Files.copy(nuevoArchivo.toPath(), Path.of(rutaNuevoArchivo), StandardCopyOption.REPLACE_EXISTING);
+
+                // Elimina el archivo anterior
+                Files.deleteIfExists(archivoActual.toPath());
+
+                System.out.println("Archivo editado. Nuevo nombre: " + nombreCompletoNuevo);
+                return nombreCompletoNuevo;
+            } else {
+                throw new IOException("No es posible editar la imagen porque no existe en la ubicación especificada.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
