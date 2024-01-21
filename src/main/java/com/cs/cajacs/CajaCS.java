@@ -354,6 +354,53 @@ public class CajaCS {
         }else{
             System.out.println("Se debe cargar una imagen para registrar el metodo de pago");
         }
+         
+
+        //EDITAR IMAGEN MEDIO DE PAGO
+        File inputFile = new File("D:\\Desktop\\daviplata.png"); //Cambiar ruta para pruebas
+        Metodos_de_pago metodoPago= mcontroller.getMetodoDePagoById(15);//Usar un ID de metodo de pago que tenga una imagen guardada en la carpeta del proyecto
+        
+        //El metodo recibe el nombre de la imagen que se va a cambiar y el nuevo archivo
+        String NuevaImagen = mcontroller.editarImagenMetodoDePago(metodoPago.getImagen(), inputFile);
+        
+        //Como el metodo devuelve el nombre de la nueva imagen lo debo enviar al metodo de editar medio de pago para cambiar nombre de la imagen en la DB
+        metodoPago.setImagen(NuevaImagen);
+        try {
+            mcontroller.editMetodoDePago(metodoPago);
+        } catch (Exception ex) {
+            Logger.getLogger(CajaCS.class.getName()).log(Level.SEVERE, null, ex);
+        };
+
+        //MANEJO DE CONTRASEÑA EN TERMINO CIFRADO
+        Usuarios nuevoUsuario = new Usuarios();
+        nuevoUsuario.setCedula("557788");
+        nuevoUsuario.setNombres("Laura");
+        nuevoUsuario.setApellidos("Perez");
+        nuevoUsuario.setCorreo("laura@example.com");
+        nuevoUsuario.setPassword("laura123");
+        
+        //Se modifico el create usuario para que automaticamente cifre la contraseña
+        //Tambien para que devuelva un mensaje si se creo correctamente el usuario o si 
+        //hubo problemas por cedula o correo repetido ya que ahora son tipo UNIQUE en la DB
+        String mensaje = ucontroller.createUsuario(nuevoUsuario); 
+        System.out.println(mensaje);
+        
+        //LOGIN
+        //Devuelve el objeto usuario que ingreso o null si hay error
+        Usuarios user = ucontroller.login("laura@example.com", "laura123");
+        if (user != null) {
+            System.out.println("Ingresó el usuario : " + user.getNombres());
+        } else {
+            System.out.println("Credenciales incorrectas, intente nuevamente");
+        }
+         
+        //CAMBIO DE CONTRASEÑA
+        //Recibe el correo del usuario y la nueva contraseña
+        try {
+            ucontroller.cambiarContraseña("laura@example.com", "clavenueva");
+        } catch (Exception ex) {
+            Logger.getLogger(CajaCS.class.getName()).log(Level.SEVERE, null, ex);
+        };
          */
     }
 }
