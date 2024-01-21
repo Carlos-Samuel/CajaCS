@@ -10,8 +10,10 @@ import com.cs.cajacs.modelos.Metodos_de_pago;
 import com.cs.cajacs.modelos.Usuarios;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,6 +46,11 @@ public class VistaMetodosPago extends javax.swing.JFrame {
         columnNames.add("Nombre");
         columnNames.add("Numero De Cuenta");
         columnNames.add("imagen");
+        //ruta
+        String directorioProyecto = System.getProperty("user.dir");
+
+        // Crea la ruta de destino dentro del directorio del proyecto
+        
 
         for (int i = 0; i < metodos.size(); i++) {
             Vector<Object> row1 = new Vector<>();
@@ -53,7 +60,9 @@ public class VistaMetodosPago extends javax.swing.JFrame {
             row1.add(id);
             row1.add(metodo.getDescripcion());
             row1.add(metodo.getCuenta());
-            row1.add(metodo.getImagen());
+            
+            String ruta_imagen = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + metodo.getImagen();
+            row1.add(new ImageIcon(ruta_imagen));
 
             data.add(row1);
         }

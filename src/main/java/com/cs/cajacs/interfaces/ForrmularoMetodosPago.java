@@ -7,6 +7,7 @@ package com.cs.cajacs.interfaces;
 import com.cs.cajacs.controllers.MetodosDePagoController;
 import com.cs.cajacs.modelos.Metodos_de_pago;
 import com.cs.cajacs.modelos.Usuarios;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -38,6 +39,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
     byte[] imagen;
     FileInputStream entrada;
     FileOutputStream salida;
+    String Nombre_imagen;
 
     public ForrmularoMetodosPago() {
         initComponents();
@@ -69,7 +71,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
         return mensaje;
     }
 
-    ForrmularoMetodosPago(String gobal_id) {
+    public ForrmularoMetodosPago(String gobal_id) {
         initComponents();
         int id = Integer.parseInt(gobal_id);
         metodo_editar = mcontroller.getMetodoDePagoById(id);
@@ -78,6 +80,29 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
         jTextNombre.setText(metodo_editar.getDescripcion());
         jTextCuenta.setText(metodo_editar.getCuenta());
+
+        // CARGAMOS Y REDIMENSIONAMOS LA IMAGEN
+        String directorioProyecto = System.getProperty("user.dir");
+
+        // Crea la ruta de destino dentro del directorio del proyecto
+        String ruta_imagen = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + metodo_editar.getImagen();
+        ImageIcon iconoOriginal = new ImageIcon(ruta_imagen);
+
+        // Obtener la imagen del ImageIcon
+        Image imagenOriginal = iconoOriginal.getImage();
+
+        // Definir el tamaño fijo deseado
+        int anchoDeseado = 200;
+        int altoDeseado = 200;
+
+        // Redimensionar la imagen
+        Image imagenRedimensionada = imagenOriginal.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
+
+        // Crear un nuevo ImageIcon con la imagen redimensionada
+        ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
+
+        // Asignar el nuevo ImageIcon al jLabelImagen
+        jLabelImagen.setIcon(iconoRedimensionado);
 
         cerrar();
         this.setLocationRelativeTo(null);
@@ -128,7 +153,6 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanelImagen = new javax.swing.JPanel();
         jLabelImagen = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -270,29 +294,23 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jLabelImagen.setText("              IMAGEN");
+
         javax.swing.GroupLayout jPanelImagenLayout = new javax.swing.GroupLayout(jPanelImagen);
         jPanelImagen.setLayout(jPanelImagenLayout);
         jPanelImagenLayout.setHorizontalGroup(
             jPanelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelImagenLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanelImagenLayout.setVerticalGroup(
             jPanelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelImagenLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -302,11 +320,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -316,9 +330,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jButton2)
-                        .addGap(29, 29, 29)
+                        .addGap(68, 68, 68)
                         .addComponent(jPanelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -340,18 +352,18 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
         //Contrasegna
         if (metodo_editar == null) {
-            if (nombre.isEmpty() || cuenta.isEmpty() || nombre_archivo == null) {
+            if (nombre.isEmpty() || cuenta.isEmpty() || Nombre_imagen == null) {
                 // Al menos uno de los campos está vacío
                 JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 Metodos_de_pago nuevo_metodo = new Metodos_de_pago();
                 nuevo_metodo.setDescripcion(nombre);
                 nuevo_metodo.setCuenta(cuenta);
-                nuevo_metodo.setImagen(nombre_archivo);
+                nuevo_metodo.setImagen(Nombre_imagen);
                 mcontroller.createMetodoDePago(nuevo_metodo);
-                String respuesta = guardar_archivo(imagen);
+                //String respuesta = guardar_archivo(imagen);
                 JOptionPane.showMessageDialog(null, "Metodo de pago Creado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                JOptionPane.showMessageDialog(null, respuesta, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Imagen " + Nombre_imagen, "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 VistaMetodosPago usuarios_ventana = new VistaMetodosPago();
                 usuarios_ventana.setVisible(true);
@@ -360,6 +372,13 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Metodo de pago Editado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
+//            usuario_editar.setCedula(cedula);
+//            usuario_editar.setNombres(nombres);
+//            usuario_editar.setCorreo(correo);
+//            usuario_editar.setApellidos(apellidos);
+//            //usuario_editar.setPassword(contra);
+//
+//            controller_usuario.editUsuario(usuario_editar);
             this.dispose();
             VistaMetodosPago usuarios_ventana = new VistaMetodosPago();
             usuarios_ventana.setVisible(true);
@@ -385,10 +404,17 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
             archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()) {
                 if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+
+                    Nombre_imagen = mcontroller.guardarImagenMetodoDePago(archivo);
                     imagen = abrir_archivo(archivo);
-                    nombre_archivo = archivo.getName();
+                    int anchoDeseado = 200;
+                    int altoDeseado = 200;
+                    ImageIcon  iconoOriginal = new ImageIcon(imagen);
+                    Image imagenOriginal = iconoOriginal.getImage();
+                    Image imagenRedimensionada = imagenOriginal.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
+                    ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
                     //JOptionPane.showMessageDialog(null, archivo.getName());
-                    jLabelImagen.setIcon(new ImageIcon(imagen));
+                    jLabelImagen.setIcon(iconoRedimensionado);
                 } else {
                     System.out.println("formato erroneo");
                 }
@@ -396,25 +422,8 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
         }
 
-//        if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
-//            archivo = seleccionar.getSelectedFile();
-//            if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
-//                String respuesta = guardar_archivo(archivo, imagen);
-//                if (respuesta != null) {
-//
-//                } else {
-//                    System.out.println("no se pudo guardar");
-//                }
-//            } else {
-//                System.out.println("archivo ");
-//            }
-//        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -453,7 +462,6 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

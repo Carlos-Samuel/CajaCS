@@ -13,6 +13,7 @@ import com.cs.cajacs.modelos.Pagos_Facturas;
 
 import com.cs.cajacs.modelos.PagosFacturasId;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -96,7 +97,7 @@ public class PagosFacturasController {
         Long sumaTotal = 0L;
         try {
             TypedQuery<Long> query = em.createQuery(
-                    "SELECT SUM(pf.Cantidad) FROM Pagos_Facturas pf WHERE pf.factura.id = :facturaId", Long.class);
+                    "SELECT SUM(pf.cantidad) FROM Pagos_Facturas pf WHERE pf.factura.id = :facturaId", Long.class);
             query.setParameter("facturaId", facturaId);
 
             sumaTotal = query.getSingleResult();
@@ -120,10 +121,12 @@ public class PagosFacturasController {
             query.setParameter("metodoDePago", idMetodos_de_pago);
 
             sumaTotal = query.getSingleResult();
-
+            
             if (sumaTotal == null) {
                 sumaTotal = 0L;
             }
+        }catch (NoResultException e) {
+            sumaTotal = 0L;
         } finally {
             em.close();
         }

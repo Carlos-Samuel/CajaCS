@@ -12,13 +12,19 @@ import com.cs.cajacs.modelos.Facturas;
 import com.cs.cajacs.modelos.Metodos_de_pago;
 import com.cs.cajacs.modelos.Pagos_Facturas;
 import com.cs.cajacs.modelos.Usuarios;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -43,6 +49,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
     Facturas factura = null;
     private int id_metodo = 0;
     private int id_factura = 0;
+    boolean editar = false;
 
     public ModuloIngresoDatos() {
         initComponents();
@@ -60,19 +67,48 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
 //        
 //            System.out.println("hola");
             JButton boton = new JButton(metodo.getDescripcion() + ' ' + indice);
+            //CARGA DE IMAGENES
+            String directorioProyecto = System.getProperty("user.dir");
 
+            // Crea la ruta de destino dentro del directorio del proyecto
+            String ruta_imagen = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + metodo.getImagen();
+            ImageIcon icono = new ImageIcon(ruta_imagen);
+            // Escala el ícono al tamaño preferido del botón
+            int anchoBoton = 100;  // Ajusta el ancho deseado del botón
+            int altoBoton = 100;   // Ajusta la altura deseada del botón
+            Image imagenEscalada = icono.getImage().getScaledInstance(anchoBoton, altoBoton, Image.SCALE_SMOOTH);
+            boton.setIcon(new ImageIcon(imagenEscalada));
+
+            // Establece el tamaño preferido del botón
+            boton.setPreferredSize(new Dimension(anchoBoton, altoBoton));
+            //boton.setIcon(icono);
+            //FIN CARGA
+            System.out.println(ruta_imagen);
             boton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Cambiar el texto del JTextField al hacer clic en el botón
                     jLabel8.setText(metodo.getDescripcion());
                     id_metodo = metodo.getIdMetodos_de_pago();
-                    System.out.println("AQUIII");
+                    jText_valor.setText(null);
+                    //System.out.println("AQUIII");
                     if (id_metodo != 0 && id_factura != 0) {
 
+                        int total_abonado = pfcontroller.calcularSaldoPendiente(id_factura);
+                        //System.out.println(total_abonado);
+                        jTextValorPendiente.setText(String.valueOf(total_abonado));
+
                         int abonado = pfcontroller.obtenerAbonadoMedioPagoFacturaId(id_factura, id_metodo);
-                        System.out.println(abonado);
-                        jText_valor.setText(String.valueOf(abonado));
+
+                        if (abonado != 0L) {
+//                            System.out.println(abonado);
+//                            System.out.println("ASSISISISI");
+//                            System.out.println(abonado);
+                            jText_valor.setText(String.valueOf(abonado));
+                            editar = true;
+                        } else {
+                            editar = false;
+                        }
                     }
 
                 }
@@ -84,6 +120,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         }
         //controller.close();
     }
+
     public void cerrar() {
         try {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -128,6 +165,8 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
 
         int valor = factura.getValorFactura();
         jTextValorTotal.setText(String.valueOf(valor));
+        int total_abonado = pfcontroller.calcularSaldoPendiente(id_factura);
+        jTextValorPendiente.setText(String.valueOf(total_abonado));
 
     }
 
@@ -445,43 +484,78 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         int id_usuario = 1;
 
         String valor = jText_valor.getText();
-
-        if (!valor.equals("")) {
-
-            System.out.println(id_metodo);
-            System.out.println(valor);
-            Long numero = null;
+        if (editar) {
+            int numero = 0;
             try {
-                numero = Long.parseLong(valor);
+                numero = Integer.parseInt(valor);
                 System.out.println("El número convertido es: " + numero);
             } catch (NumberFormatException e) {
                 System.out.println("No se puede convertir a entero. Formato no válido.");
             }
+            JOptionPane.showMessageDialog(null, "EDITAR PAGO", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
+            int id_factura = factura.getIdFacturas();
 
-            // Crear un nuevo pago de factura
-            Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
-            // Configura los objetos Facturas, Metodos_de_pago y Usuarios según tus necesidades
+            try {
 
-            //buscamos la factura
-            System.out.println("METODO DE PAGO ES " + id_metodo);
-            Metodos_de_pago metodoDePago = controller.getMetodoDePagoById(id_metodo);
-            System.out.println(metodoDePago);
-            Usuarios usuario = controller_usuario.getUsuarioById(id_usuario);
-            System.out.println(usuario);
+                int total_abonado = pfcontroller.calcularSaldoPendiente(id_factura);
+                if (numero > total_abonado) {
+                    JOptionPane.showMessageDialog(null, "El valor a abonar es mayor al pendiente", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }else{
+                pfcontroller.editPagosFacturas(id_factura, id_metodo, numero);
+                jText_valor.setText("");
+                //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);
+                JOptionPane.showMessageDialog(null, "Registrado correctamente", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
+                actualizar_campos();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(ModuloIngresoDatos.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-            nuevoPagoFactura.setFactura(factura);
-            nuevoPagoFactura.setMetodoDePago(metodoDePago);
-            nuevoPagoFactura.setUsuario(usuario);
-            nuevoPagoFactura.setCantidad(numero); // Cantidad de pago
-            System.out.println(numero);
-            pfcontroller.createPagoFactura(nuevoPagoFactura);
-             System.out.println("AQUI VAMOS BIEN");
-            jText_valor.setText("");
-            //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);
-            JOptionPane.showMessageDialog(null, "Registrado correctamente", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
-            actualizar_campos();
         } else {
-            JOptionPane.showMessageDialog(null, "ingrese el monto del metodo de pago.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            if (!valor.equals("")) {
+
+                System.out.println(id_metodo);
+                System.out.println(valor);
+                Long numero = null;
+                try {
+                    numero = Long.parseLong(valor);
+                    System.out.println("El número convertido es: " + numero);
+                } catch (NumberFormatException e) {
+                    System.out.println("No se puede convertir a entero. Formato no válido.");
+                }
+
+                // Crear un nuevo pago de factura
+                Pagos_Facturas nuevoPagoFactura = new Pagos_Facturas();
+                // Configura los objetos Facturas, Metodos_de_pago y Usuarios según tus necesidades
+
+                //buscamos la factura
+                System.out.println("METODO DE PAGO ES " + id_metodo);
+                Metodos_de_pago metodoDePago = controller.getMetodoDePagoById(id_metodo);
+                System.out.println(metodoDePago);
+                Usuarios usuario = controller_usuario.getUsuarioById(id_usuario);
+                System.out.println(usuario);
+
+                nuevoPagoFactura.setFactura(factura);
+                nuevoPagoFactura.setMetodoDePago(metodoDePago);
+                nuevoPagoFactura.setUsuario(usuario);
+                nuevoPagoFactura.setCantidad(numero); // Cantidad de pago
+                System.out.println(numero);
+                int total_abonado = pfcontroller.calcularSaldoPendiente(id_factura);
+                if (numero > total_abonado) {
+                    JOptionPane.showMessageDialog(null, "El valor a abonar es mayor al pendiente", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+
+                    pfcontroller.createPagoFactura(nuevoPagoFactura);
+                    System.out.println("AQUI VAMOS BIEN");
+                    jText_valor.setText("");
+                    //JOptionPane.showConfirmDialog(null, "Registrado correctamente", "Confirmación", JOptionPane.YES_NO_OPTION);
+                    JOptionPane.showMessageDialog(null, "Registrado correctamente", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
+                    actualizar_campos();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "ingrese el monto del metodo de pago.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_jPanel1MouseClicked
