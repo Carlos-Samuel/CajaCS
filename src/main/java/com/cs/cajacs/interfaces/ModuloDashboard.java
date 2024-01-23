@@ -145,13 +145,14 @@ public class ModuloDashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        
         ModuloIngresoDatos nuevaVentana = new ModuloIngresoDatos();
         nuevaVentana.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        dispose();
+        DetalleVentasMedioPago nuevaVentana = new DetalleVentasMedioPago();
+        nuevaVentana.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -167,7 +168,7 @@ public class ModuloDashboard extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        dispose();
+        this.dispose();
         VistaUsuarios u = new VistaUsuarios();
         u.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed

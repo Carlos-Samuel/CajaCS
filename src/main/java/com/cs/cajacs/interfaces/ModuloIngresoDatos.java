@@ -55,6 +55,7 @@ public class ModuloIngresoDatos extends javax.swing.JFrame {
         initComponents();
         botones = new ArrayList<JButton>();
         indice = 0;
+        this.setLocationRelativeTo(null);
         cerrar();
 //        MetodosDePagoController controller = new MetodosDePagoController();
         List<Metodos_de_pago> prueba = controller.getAllMetodosDePago();

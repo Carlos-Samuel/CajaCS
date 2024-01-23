@@ -260,12 +260,12 @@ public class CajaCS {
 
 
          */
- /*
+
         //*************METODOS CINDY*****************
         //INFORME 1 RECIBIENDO FECHAS 
         //Formato Date ->  Año, mes (va de 0 a 11), día
         Date fechaInicio = new Date(2022 - 1900, 7, 01); //Equivale a 2022-08-01
-        Date fechaFin = new Date(2022 - 1900, 7, 13); //Equivale a 2022-08-13
+        Date fechaFin = new Date(2025 - 1900, 7, 13); //Equivale a 2022-08-13
         List<Object[]> informe1RecibeFechas = fcontroller.getInforme1(fechaInicio, fechaFin);
 
         System.out.println("\nINFORME 1 - Con fechas");
@@ -297,7 +297,7 @@ public class CajaCS {
          
         //INFORME 2        
         System.out.println("\nINFORME 2");
-        List<Object[]> informe2 = fcontroller.getInforme2("Nequi",fechaInicio,fechaFin);
+        List<Object[]> informe2 = fcontroller.getInforme2("NEQUI",fechaInicio,fechaFin);
         if (informe2 != null) {
             for (Object[] resultado : informe2) {
                 Date fechaFactura = (Date) resultado[0];
@@ -317,7 +317,7 @@ public class CajaCS {
         }else {
             System.out.println("Por favor ingrese el rango de fechas para hacer la busqueda.");
         }
-        
+        /*
         //OBTENER IMAGEN MEDIO DE PAGO
         String imagen = mcontroller.getImagenMetodoDePago(1);
         System.out.println("\nIMAGEN MEDIO DE PAGO SELECCIONADO : " + imagen);

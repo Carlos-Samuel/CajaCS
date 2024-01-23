@@ -1,26 +1,27 @@
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\Formulario_Usuarios.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\PagosFacturasId.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\coneccion\MySQLDatabase.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaUsuarios.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Pagos_Facturas.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Metodos_de_pago.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaMetodosPago.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosHasPagosFacturasController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosHasPermisosController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\CajaCS.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaConsolidadoVentasMedioPago.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\ModuloDashboard.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\ModuloLogin.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\MetodosDePagoController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\ModuloIngresoDatos.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\AuxiliarController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Permisos.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios_has_Pagos_Facturas.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios_has_Permisos.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\interfaces\ForrmularoMetodosPago.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\PermisosController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\PagosFacturasController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\controllers\FacturasController.java
-D:\Documents\Proyecto JAVA\CajaCS\src\main\java\com\cs\cajacs\modelos\Facturas.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\PagosFacturasController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\ModuloIngresoDatos.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Facturas.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\CajaCS.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\coneccion\MySQLDatabase.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios_has_Permisos.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios_has_Pagos_Facturas.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Metodos_de_pago.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosHasPagosFacturasController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\PagosFacturasId.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\AuxiliarController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaUsuarios.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosHasPermisosController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\ForrmularoMetodosPago.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaMetodosPago.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\PermisosController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\ModuloDashboard.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\ModuloLogin.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\DetalleVentasMedioPago.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\VistaConsolidadoVentasMedioPago.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\FacturasController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Permisos.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\MetodosDePagoController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\interfaces\Formulario_Usuarios.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\controllers\UsuariosController.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Pagos_Facturas.java
+C:\Users\kuchi\Documents\proyectos\caja-samuel\CajaCS\src\main\java\com\cs\cajacs\modelos\Usuarios.java

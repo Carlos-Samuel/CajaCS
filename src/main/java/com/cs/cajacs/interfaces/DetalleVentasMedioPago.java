@@ -5,7 +5,9 @@
 package com.cs.cajacs.interfaces;
 
 import com.cs.cajacs.controllers.FacturasController;
+import com.cs.cajacs.controllers.MetodosDePagoController;
 import com.cs.cajacs.controllers.PagosFacturasController;
+import com.cs.cajacs.modelos.Metodos_de_pago;
 import com.cs.cajacs.modelos.Usuarios;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -13,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,18 +24,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kuchi
  */
-public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
+public class DetalleVentasMedioPago extends javax.swing.JFrame {
 
     /**
      * Creates new form VistaConsolidadoVentasMedioPago
      */
     PagosFacturasController pfcontroller = new PagosFacturasController();
     FacturasController fcontroller = new FacturasController();
-
-    public VistaConsolidadoVentasMedioPago() {
+    private MetodosDePagoController mcontroller = new MetodosDePagoController();
+    public DetalleVentasMedioPago() {
         initComponents();
         this.setLocationRelativeTo(null);
-        cargar_tabla(null,null);
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+                List<Metodos_de_pago> prueba = mcontroller.getAllMetodosDePago();
+        for (int i = 0; i < prueba.size(); i++) {
+            comboBoxModel.addElement(prueba.get(i).getDescripcion());
+        
+        }
+        jComboBox1.setModel(comboBoxModel);
+        //cargar_tabla(null, null);
         cerrar();
     }
 
@@ -59,32 +69,53 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
         vista.setVisible(true);
     }
 
-    public void cargar_tabla( Date inicio,Date fin) {
+    public void cargar_tabla(Date inicio, Date fin,String metodo) {
         Vector<Vector<Object>> data = new Vector<>();
-        List<Object[]> informe1NoRecibeFechas = fcontroller.getInforme1(inicio, fin);
+        
+        System.out.println(metodo);
+        List<Object[]> informe1NoRecibeFechas = fcontroller.getInforme2(metodo, inicio, fin);
 
+        /*
+        Fecha : 2024-01-09 17:56:06.0
+        Prefijo: FF
+        Numero : 1
+        Valor factura: 15000
+        Total medio de pago : 200
+
+         */
         System.out.println("\nINFORME 1 - Sin fechas");
-        if (informe1NoRecibeFechas != null) {
-            for (Object[] resultado : informe1NoRecibeFechas) {
-                Vector<Object> row1 = new Vector<>();
-                row1.add((String) resultado[0]);
-                row1.add((BigDecimal) resultado[1]);
-                data.add(row1);
-                String descripcion = (String) resultado[0];
-                BigDecimal cantidadTotal = (BigDecimal) resultado[1];
 
-                System.out.println(descripcion + " : " + cantidadTotal);
+        List<Object[]> informe2 = fcontroller.getInforme2(metodo, inicio, fin);
+        if (informe2 != null) {
+            for (Object[] resultado : informe2) {
+                Vector<Object> row1 = new Vector<>();
+                Date fechaFactura = (Date) resultado[0];
+                String prefijo = (String) resultado[1];
+                String numFactura = (String) resultado[2];
+                String valorFactura = (String) resultado[3];
+                Integer cantidadMedioPago = (Integer) resultado[4];
+
+        
+                row1.add(fechaFactura);
+                row1.add(prefijo);
+                row1.add(numFactura);
+                row1.add(valorFactura);
+                row1.add(cantidadMedioPago);
+                data.add(row1);
+
             }
         } else {
-            System.out.println("Por favor ingrese ambas fechas.");
-            JOptionPane.showMessageDialog(null, "Por favor ingrese ambas fechas.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "LPor favor ingrese el rango de fechas para hacer la busqueda.", "Error", JOptionPane.ERROR_MESSAGE);
+            //System.out.println("Por favor ingrese el rango de fechas para hacer la busqueda.");
         }
 
+
         Vector<String> columnNames = new Vector<>();
-        columnNames.add("Metodo De Pago");
-        columnNames.add("Total");
-
-
+        columnNames.add("Fecha");
+        columnNames.add("Prefijo");
+        columnNames.add("Numero");
+        columnNames.add("Valor Factura");
+        columnNames.add("Total Abonado");
 
         // Crear un modelo de tabla
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
@@ -111,20 +142,21 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jFechaFin = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelTitulo.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Consolidado de ventas por medio de pago");
+        jLabel2.setText("Detalle De Ventas Por Medio De Pago");
 
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
         jPanelTituloLayout.setHorizontalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTituloLayout.createSequentialGroup()
-                .addContainerGap(228, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(167, 167, 167))
         );
@@ -164,6 +196,14 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hola1" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTitulo1Layout = new javax.swing.GroupLayout(jPanelTitulo1);
         jPanelTitulo1.setLayout(jPanelTitulo1Layout);
         jPanelTitulo1Layout.setHorizontalGroup(
@@ -174,12 +214,14 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
                     .addGroup(jPanelTitulo1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFechaUnicio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(jFechaUnicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
+                        .addComponent(jFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1029, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -195,7 +237,8 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
                     .addGroup(jPanelTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(229, Short.MAX_VALUE))
@@ -207,9 +250,9 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanelPrincipalLayout.setVerticalGroup(
@@ -247,9 +290,14 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
         Date fechaInicio = jFechaUnicio.getDate();
         System.out.println(fechaInicio);
         Date fechaFin = jFechaFin.getDate();
-        this.cargar_tabla(fechaInicio, fechaFin);
+        String elementoSeleccionado = (String) jComboBox1.getSelectedItem();
+        this.cargar_tabla(fechaInicio, fechaFin,elementoSeleccionado);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,26 +316,30 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaConsolidadoVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetalleVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaConsolidadoVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetalleVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaConsolidadoVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetalleVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaConsolidadoVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetalleVentasMedioPago.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaConsolidadoVentasMedioPago().setVisible(true);
+                new DetalleVentasMedioPago().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jFechaFin;
     private com.toedter.calendar.JDateChooser jFechaUnicio;
     private javax.swing.JLabel jLabel2;
