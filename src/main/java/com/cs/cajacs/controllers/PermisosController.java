@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import com.cs.cajacs.modelos.Permisos;
+import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -18,8 +20,8 @@ import com.cs.cajacs.modelos.Permisos;
 public class PermisosController {
     private EntityManagerFactory emf;
 
-    public PermisosController(String persistenceUnitName) {
-        this.emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+    public PermisosController() {
+        this.emf = Persistence.createEntityManagerFactory("MiUnidadPersistencia");
     }
 
     public void createPermiso(Permisos permiso) {
@@ -39,5 +41,15 @@ public class PermisosController {
 
     public void close() {
         emf.close();
+    }
+    
+    public List<Permisos> getAllPermisos() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Permisos> query = em.createQuery("SELECT p FROM Permisos p", Permisos.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
 }

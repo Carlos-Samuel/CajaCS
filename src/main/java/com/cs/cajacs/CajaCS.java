@@ -358,7 +358,7 @@ public class CajaCS {
 
         //EDITAR IMAGEN MEDIO DE PAGO
         File inputFile = new File("D:\\Desktop\\daviplata.png"); //Cambiar ruta para pruebas
-        Metodos_de_pago metodoPago= mcontroller.getMetodoDePagoById(15);//Usar un ID de metodo de pago que tenga una imagen guardada en la carpeta del proyecto
+        Metodos_de_pago metodoPago= mcontroller.getMetodoDePagoById(1);//Usar un ID de metodo de pago que tenga una imagen guardada en la carpeta del proyecto
         
         //El metodo recibe el nombre de la imagen que se va a cambiar y el nuevo archivo
         String NuevaImagen = mcontroller.editarImagenMetodoDePago(metodoPago.getImagen(), inputFile);
@@ -401,6 +401,39 @@ public class CajaCS {
         } catch (Exception ex) {
             Logger.getLogger(CajaCS.class.getName()).log(Level.SEVERE, null, ex);
         };
+         
+ 
+        //MANEJO DE PERMISOS
+        UsuariosHasPermisosController uhpcontroller = new UsuariosHasPermisosController();
+        PermisosController pecontroller = new PermisosController();
+
+        //Los permisos ya estan creados en la BD
+        //Se pueden listar con este metodo
+        System.out.println("LISTADO DE PERMISOS");
+        List<Permisos> listaPermisos = pecontroller.getAllPermisos();
+
+        for (Permisos permisos : listaPermisos) {
+            System.out.println(permisos.getIdPermisos() + " - " + permisos.getDescripcion());
+        }
+
+        //1. Verificar permiso
+        //Recibe el id del usuario y del permiso, devuelve true o false al verificar el permiso
+        Boolean tienePermiso = uhpcontroller.verificarPermisoDeUsuario(1, 1);
+        System.out.println("Estado del permiso : " + tienePermiso);
+
+        //2.Asignar permiso
+        if (uhpcontroller.verificarPermisoDeUsuario(1, 4)) { //Verificacion opcional para saber si el usuario ya tiene el permiso
+            System.out.println("El usuario seleccionado ya cuenta con ese permiso");
+        } else {
+            //Para asingar el permiso recibe el id del usuario y del permiso, devuelve un mensaje con la confirmacion de la operacion o un determinado error
+            String mensaje = uhpcontroller.createPermisoUsuario(1, 4);
+            System.out.println(mensaje);
+        }
+
+        //3.Eliminar un permiso
+        //Recibe el id del usuario y del permiso, devuelve un mensaje con la confirmacion de la operacion o un determinado error
+        String mensajeEliminacion = uhpcontroller.deleteUsuarioPermiso(1, 4);
+        System.out.println(mensajeEliminacion);
          */
     }
 }
