@@ -13,6 +13,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -36,7 +38,7 @@ public class VistaMetodosPago extends javax.swing.JFrame {
         cerrar();
         jEditar.setVisible(false);
         jEliminar.setVisible(false);
-        cerrar();
+       
         this.setLocationRelativeTo(null);
         List<Metodos_de_pago> metodos = mcontroller.getAllMetodosDePago();
         // Datos de ejemplo
@@ -45,6 +47,7 @@ public class VistaMetodosPago extends javax.swing.JFrame {
         columnNames.add("ID");
         columnNames.add("Nombre");
         columnNames.add("Numero De Cuenta");
+        columnNames.add("Estado");
         columnNames.add("imagen");
         //ruta
         String directorioProyecto = System.getProperty("user.dir");
@@ -60,6 +63,12 @@ public class VistaMetodosPago extends javax.swing.JFrame {
             row1.add(id);
             row1.add(metodo.getDescripcion());
             row1.add(metodo.getCuenta());
+            if (metodo.getActivo()){
+                row1.add("ACTIVO");
+            }else{
+                row1.add("DESACTIVADO");
+            }
+            
             
             String ruta_imagen = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + metodo.getImagen();
             row1.add(new ImageIcon(ruta_imagen));
@@ -72,7 +81,55 @@ public class VistaMetodosPago extends javax.swing.JFrame {
         jTable1.setModel(tableModel);
 
     }
+    public void actualizar_tabla(){
+            jEditar.setVisible(false);
+        jEliminar.setVisible(false);
+       
+        this.setLocationRelativeTo(null);
+        List<Metodos_de_pago> metodos = mcontroller.getAllMetodosDePago();
+        // Datos de ejemplo
+        Vector<Vector<Object>> data = new Vector<>();
+        Vector<String> columnNames = new Vector<>();
+        columnNames.add("ID");
+        columnNames.add("Nombre");
+        columnNames.add("Numero De Cuenta");
+        columnNames.add("Estado");
+        columnNames.add("imagen");
+        //ruta
+        String directorioProyecto = System.getProperty("user.dir");
 
+        // Crea la ruta de destino dentro del directorio del proyecto
+        
+
+        for (int i = 0; i < metodos.size(); i++) {
+            Vector<Object> row1 = new Vector<>();
+            Metodos_de_pago metodo = metodos.get(i);
+
+            String id = String.valueOf(metodo.getIdMetodos_de_pago());
+            row1.add(id);
+            row1.add(metodo.getDescripcion());
+            row1.add(metodo.getCuenta());
+            if (metodo.getActivo()){
+                row1.add("ACTIVO");
+            }else{
+                row1.add("DESACTIVADO");
+            }
+            
+            
+            String ruta_imagen = directorioProyecto + File.separator + "ImagenesMedioDePago" + File.separator + metodo.getImagen();
+            row1.add(new ImageIcon(ruta_imagen));
+
+            data.add(row1);
+        }
+
+        // Crear un modelo de tabla
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        jTable1.setModel(tableModel);
+    
+    
+    
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -224,23 +281,23 @@ public class VistaMetodosPago extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Eliminar");
+        jLabel8.setText("Desactivar");
 
         javax.swing.GroupLayout jEliminarLayout = new javax.swing.GroupLayout(jEliminar);
         jEliminar.setLayout(jEliminarLayout);
         jEliminarLayout.setHorizontalGroup(
             jEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jEliminarLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+            .addGroup(jEliminarLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel8)
-                .addGap(17, 17, 17))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jEliminarLayout.setVerticalGroup(
             jEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jEliminarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jEliminarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel8)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
@@ -326,11 +383,25 @@ public class VistaMetodosPago extends javax.swing.JFrame {
             modal_metodo_editar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un Metodo de pago.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            
         }
     }//GEN-LAST:event_jEditarMouseClicked
 
     private void jEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jEliminarMouseClicked
         // TODO add your handling code here:
+        int respuesta = JOptionPane.showConfirmDialog(this,"¿seguro que desea desactivar este medio de pago?.");
+        if (respuesta == JOptionPane.YES_OPTION) {
+        if (gobal_id != null){
+            int id = Integer.parseInt(gobal_id);
+            try {
+                mcontroller.desactivarMetodoDePago(id);
+                actualizar_tabla();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Algo salio mal.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(VistaMetodosPago.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        }
     }//GEN-LAST:event_jEliminarMouseClicked
 
     /**

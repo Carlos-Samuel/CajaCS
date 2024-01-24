@@ -435,5 +435,19 @@ public class CajaCS {
         String mensajeEliminacion = uhpcontroller.deleteUsuarioPermiso(1, 4);
         System.out.println(mensajeEliminacion);
          */
+        
+                //MANEJO DE CONTRASEÑA EN TERMINO CIFRADO
+        Usuarios nuevoUsuario = new Usuarios();
+        nuevoUsuario.setCedula("1007599145");
+        nuevoUsuario.setNombres("Richard");
+        nuevoUsuario.setApellidos("Bejarano");
+        nuevoUsuario.setCorreo("richardbejarano29@gmail.com");
+        nuevoUsuario.setPassword("pelusa99");
+        
+        //Se modifico el create usuario para que automaticamente cifre la contraseña
+        //Tambien para que devuelva un mensaje si se creo correctamente el usuario o si 
+        //hubo problemas por cedula o correo repetido ya que ahora son tipo UNIQUE en la DB
+        String mensaje = ucontroller.createUsuario(nuevoUsuario); 
+        System.out.println(mensaje);
     }
 }

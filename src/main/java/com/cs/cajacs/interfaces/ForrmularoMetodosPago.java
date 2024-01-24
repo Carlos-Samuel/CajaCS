@@ -40,10 +40,14 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
     FileInputStream entrada;
     FileOutputStream salida;
     String Nombre_imagen;
+    
+    boolean imagen_editada = false;
 
     public ForrmularoMetodosPago() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jCheckBox1.setSelected(true);
+        
     }
 
     public byte[] abrir_archivo(File archivo) {
@@ -80,6 +84,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
         jTextNombre.setText(metodo_editar.getDescripcion());
         jTextCuenta.setText(metodo_editar.getCuenta());
+        jCheckBox1.setSelected(metodo_editar.getActivo());
 
         // CARGAMOS Y REDIMENSIONAMOS LA IMAGEN
         String directorioProyecto = System.getProperty("user.dir");
@@ -151,6 +156,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanelImagen = new javax.swing.JPanel();
         jLabelImagen = new javax.swing.JLabel();
 
@@ -246,6 +252,14 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCheckBox1.setText("Estado");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -263,14 +277,16 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                             .addComponent(jTextNombre)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1)))
+                                .addComponent(jLabel4)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +302,8 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jCheckBox1))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -363,15 +380,36 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                 mcontroller.createMetodoDePago(nuevo_metodo);
                 //String respuesta = guardar_archivo(imagen);
                 JOptionPane.showMessageDialog(null, "Metodo de pago Creado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                JOptionPane.showMessageDialog(null, "Imagen " + Nombre_imagen, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Imagen " + Nombre_imagen, "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 VistaMetodosPago usuarios_ventana = new VistaMetodosPago();
                 usuarios_ventana.setVisible(true);
 
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Metodo de pago Editado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(nombre);
+            System.out.println(cuenta);
+            
+            if (!nombre.isEmpty() || !cuenta.isEmpty() ) {
+                metodo_editar.setDescripcion(nombre);
+                metodo_editar.setCuenta(cuenta);
+                System.out.println(jCheckBox1.isSelected());
+                metodo_editar.setActivo(jCheckBox1.isSelected());
 
+                
+                if (imagen_editada){
+                    String  nombre_nuevo = mcontroller.editarImagenMetodoDePago(metodo_editar.getImagen(), archivo);
+                    metodo_editar.setImagen(nombre_nuevo);
+                    System.out.println("IMAGEN EDITADA "+nombre_nuevo);
+                }
+                              
+                try {
+                    mcontroller.editMetodoDePago(metodo_editar);
+                } catch (Exception ex) {
+                    System.out.println("ALGO SALIO MAL");
+                    Logger.getLogger(ForrmularoMetodosPago.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(null, "Metodo de pago Editado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 //            usuario_editar.setCedula(cedula);
 //            usuario_editar.setNombres(nombres);
 //            usuario_editar.setCorreo(correo);
@@ -379,10 +417,13 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 //            //usuario_editar.setPassword(contra);
 //
 //            controller_usuario.editUsuario(usuario_editar);
-            this.dispose();
-            VistaMetodosPago usuarios_ventana = new VistaMetodosPago();
-            usuarios_ventana.setVisible(true);
-
+                this.dispose();
+                VistaMetodosPago usuarios_ventana = new VistaMetodosPago();
+                usuarios_ventana.setVisible(true);
+            }else{
+            
+            JOptionPane.showMessageDialog(null, "Algo salio mal", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
         // TODO add your handling code here:
 
@@ -409,12 +450,13 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
                     imagen = abrir_archivo(archivo);
                     int anchoDeseado = 200;
                     int altoDeseado = 200;
-                    ImageIcon  iconoOriginal = new ImageIcon(imagen);
+                    ImageIcon iconoOriginal = new ImageIcon(imagen);
                     Image imagenOriginal = iconoOriginal.getImage();
                     Image imagenRedimensionada = imagenOriginal.getScaledInstance(anchoDeseado, altoDeseado, Image.SCALE_SMOOTH);
                     ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimensionada);
                     //JOptionPane.showMessageDialog(null, archivo.getName());
                     jLabelImagen.setIcon(iconoRedimensionado);
+                    imagen_editada = true;
                 } else {
                     System.out.println("formato erroneo");
                 }
@@ -424,6 +466,10 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,6 +508,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

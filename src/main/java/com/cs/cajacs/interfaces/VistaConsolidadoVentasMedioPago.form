@@ -124,12 +124,12 @@
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jFechaUnicio" min="-2" pref="176" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jFechaFin" min="-2" pref="176" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton1" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" pref="182" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="1029" max="-2" attributes="0"/>
                       </Group>
@@ -165,7 +165,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Helvetica Neue" size="48" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fecha Inicio:"/>
+                <Property name="text" type="java.lang.String" value="F Inicio:"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -196,7 +196,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Helvetica Neue" size="48" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fecha Fin:"/>
+                <Property name="text" type="java.lang.String" value="F Fin:"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jFechaFin">

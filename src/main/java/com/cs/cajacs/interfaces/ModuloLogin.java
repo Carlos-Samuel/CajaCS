@@ -4,6 +4,10 @@
  */
 package com.cs.cajacs.interfaces;
 
+import com.cs.cajacs.controllers.UsuariosController;
+import com.cs.cajacs.modelos.Usuarios;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author carlossamuelmedinapardo
@@ -13,6 +17,8 @@ public class ModuloLogin extends javax.swing.JFrame {
     /**
      * Creates new form ModuloLogin
      */
+    UsuariosController ucontroller = new UsuariosController();
+
     public ModuloLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -43,10 +49,10 @@ public class ModuloLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("Contraseña*:");
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Usuario*:");
 
         jPasswordField1.setFont(new java.awt.Font("Helvetica Neue", 0, 13)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
@@ -158,10 +164,29 @@ public class ModuloLogin extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
-        dispose();
+        String correo = jTextField1.getText();
+        String contrasegna = jPasswordField1.getText();
 
-        ModuloDashboard nuevaVentana = new ModuloDashboard();
-        nuevaVentana.setVisible(true);
+        if (correo.isEmpty() || contrasegna.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Porfavor digite todos los campos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            Usuarios user = ucontroller.login(correo, contrasegna);
+            if (user != null) {
+
+                System.out.println("Ingresó el usuario : " + user.getNombres());
+                dispose();
+
+                ModuloDashboard nuevaVentana = new ModuloDashboard();
+                nuevaVentana.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas, intente nuevamente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+        }
+
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
