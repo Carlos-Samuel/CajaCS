@@ -434,6 +434,35 @@ public class CajaCS {
         //Recibe el id del usuario y del permiso, devuelve un mensaje con la confirmacion de la operacion o un determinado error
         String mensajeEliminacion = uhpcontroller.deleteUsuarioPermiso(1, 4);
         System.out.println(mensajeEliminacion);
+         
+ 
+        //MODIFICACION INFORME 2   
+        //Ahora al enviar null como medio de pago devuelve la informacion de todos los medios de pago
+        Date fechaInicio = new Date(2022 - 1900, 7, 01); //Equivale a 2022-08-01
+        Date fechaFin = new Date(2022 - 1900, 7, 29); //Equivale a 2022-08-13
+        
+        System.out.println("\nINFORME 2");
+        List<Object[]> informe2 = fcontroller.getInforme2(null, fechaInicio, fechaFin);
+        if (informe2 != null) {
+            for (Object[] resultado : informe2) {
+                Date fechaFactura = (Date) resultado[0];
+                String prefijo = (String) resultado[1];
+                String numFactura = (String) resultado[2];
+                String valorFactura = (String) resultado[3];
+                Integer cantidadMedioPago = (Integer) resultado[4];
+                String medioPago = (String) resultado[5];
+
+                System.out.println("**************************");
+                System.out.println("Fecha : " + fechaFactura);
+                System.out.println("Prefijo: " + prefijo);
+                System.out.println("Numero : " + numFactura);
+                System.out.println("Valor factura: " + valorFactura);
+                System.out.println("Total medio de pago : " + cantidadMedioPago);
+                System.out.println("Medio de pago : " + medioPago);
+            }
+        } else {
+            System.out.println("Por favor ingrese el rango de fechas para hacer la busqueda.");
+        }
          */
     }
 }

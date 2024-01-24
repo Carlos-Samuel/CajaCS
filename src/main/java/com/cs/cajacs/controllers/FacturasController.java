@@ -135,13 +135,22 @@ public class FacturasController {
             }
             
             String consulta = "SELECT f.fechaRegistrada, f.Prefijo, f.NumFactura, f.ValorFactura, "
-                    + "pf.Cantidad FROM Metodos_de_pago mp JOIN Pagos_Facturas pf "
+                    + "pf.Cantidad, mp.Descripcion FROM Metodos_de_pago mp JOIN Pagos_Facturas pf "
                     + "ON mp.idMetodos_de_pago = pf.Metodos_de_pago_idMetodos_de_pago JOIN Facturas f "
-                    + "ON pf.Facturas_idFacturas = f.idFacturas WHERE mp.Descripcion = :medioPago "
-                    + "AND f.fechaRegistrada BETWEEN :fechaInicio AND :fechaFin ";
+                    + "ON pf.Facturas_idFacturas = f.idFacturas WHERE ";
+            
+            if (medioPago != null) {
+                consulta += "mp.Descripcion = :medioPago AND ";
+            }
+            
+            consulta += "f.fechaRegistrada BETWEEN :fechaInicio AND :fechaFin ORDER BY f.fechaRegistrada DESC";
 
             Query query = em.createNativeQuery(consulta);
-            query.setParameter("medioPago", medioPago);
+            
+            if (medioPago != null) {
+                query.setParameter("medioPago", medioPago);
+            }
+            
             query.setParameter("fechaInicio", fechaInicio);
             query.setParameter("fechaFin", fechaFin);
 
