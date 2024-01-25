@@ -34,6 +34,7 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cargar_tabla(null,null);
         cerrar();
+        setResizable(false);
     }
 
     public void cerrar() {

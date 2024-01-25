@@ -31,6 +31,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         initComponents();
         cerrar();
         this.setLocationRelativeTo(null);
+        PanelContrasegna1.setVisible(false);
     }
 
     public Formulario_Usuarios(String cedula) {
@@ -46,6 +47,9 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jTextCorreo.setText(usuario_editar.getCorreo());
         cerrar();
         this.setLocationRelativeTo(null);
+        PanelContrasegna.setVisible(false);
+        PanelContrasegna1.setVisible(true);
+        
 //         JOptionPane.showMessageDialog(null, cedula, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -67,18 +71,24 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextCorreo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jPassword1 = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
-        jPassword2 = new javax.swing.JPasswordField();
-        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        PanelContrasegna = new javax.swing.JPanel();
+        jPassword1 = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPassword2 = new javax.swing.JPasswordField();
+        PanelContrasegna1 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextNombres.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextNombres.addActionListener(new java.awt.event.ActionListener() {
@@ -86,9 +96,11 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 jTextNombresActionPerformed(evt);
             }
         });
+        jPanel2.add(jTextNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 117, 681, 42));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel4.setText("Cedula:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, -1, -1));
 
         jTextCedula.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextCedula.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +108,11 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 jTextCedulaActionPerformed(evt);
             }
         });
+        jPanel2.add(jTextCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 39, 681, 42));
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel5.setText("Nombres:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 87, -1, -1));
 
         jTextApellidos.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextApellidos.addActionListener(new java.awt.event.ActionListener() {
@@ -106,9 +120,11 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 jTextApellidosActionPerformed(evt);
             }
         });
+        jPanel2.add(jTextApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 195, 681, 42));
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel6.setText("Apellidos:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 165, -1, -1));
 
         jTextCorreo.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTextCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -116,9 +132,43 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 jTextCorreoActionPerformed(evt);
             }
         });
+        jPanel2.add(jTextCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 273, 681, 42));
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel7.setText("Correo Electronico:");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 243, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Confirmar");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 14, 129, -1));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 529, 680, 60));
+
+        jPanel4.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Cancelar");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 16, -1, -1));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 609, 681, 60));
 
         jPassword1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPassword1.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +180,9 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel8.setText("Contraseña:");
 
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel9.setText("Confirmar Contraseña:");
+
         jPassword2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPassword2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,149 +190,91 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel9.setText("Confirmar Contraseña:");
-
-        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel3MouseClicked(evt);
-            }
-        });
-
-        jLabel1.setBackground(new java.awt.Color(0, 153, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Confirmar");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(16, 16, 16))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(255, 51, 51));
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
-            }
-        });
-
-        jLabel2.setBackground(new java.awt.Color(0, 153, 255));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cancelar");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(jLabel2)
+        javax.swing.GroupLayout PanelContrasegnaLayout = new javax.swing.GroupLayout(PanelContrasegna);
+        PanelContrasegna.setLayout(PanelContrasegnaLayout);
+        PanelContrasegnaLayout.setHorizontalGroup(
+            PanelContrasegnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelContrasegnaLayout.createSequentialGroup()
+                .addGroup(PanelContrasegnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelContrasegnaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelContrasegnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPassword1)
+                            .addComponent(jPassword2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(PanelContrasegnaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addGap(0, 471, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(PanelContrasegnaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel2)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextNombres)
-                            .addComponent(jTextCedula)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPassword1)
-                            .addComponent(jPassword2)
-                            .addComponent(jTextCorreo)
-                            .addComponent(jTextApellidos)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel7))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(48, 48, 48))
-                    .addComponent(jTextApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        PanelContrasegnaLayout.setVerticalGroup(
+            PanelContrasegnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelContrasegnaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(PanelContrasegna, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 331, 681, 180));
+
+        jPanel6.setBackground(new java.awt.Color(255, 204, 51));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
+
+        jLabel12.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Cambiar Contraseña");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(218, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel12)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout PanelContrasegna1Layout = new javax.swing.GroupLayout(PanelContrasegna1);
+        PanelContrasegna1.setLayout(PanelContrasegna1Layout);
+        PanelContrasegna1Layout.setHorizontalGroup(
+            PanelContrasegna1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelContrasegna1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelContrasegna1Layout.setVerticalGroup(
+            PanelContrasegna1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelContrasegna1Layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel2.add(PanelContrasegna1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 331, 681, 180));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 700, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -320,18 +315,29 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         String contra = jPassword1.getText();
         String contra2 = jPassword2.getText();
 
-        if (cedula.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || contra.isEmpty() || contra2.isEmpty()) {
+        if (cedula.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() ) {
             // Al menos uno de los campos está vacío
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (contra.equals(contra2) && !(contra.equals(""))) {
+            //if (contra.equals(contra2) && !(contra.equals(""))) {
                 Usuarios usuario = new Usuarios();
                 usuario.setCedula(cedula);
                 usuario.setNombres(nombres);
                 usuario.setCorreo(correo);
                 usuario.setApellidos(apellidos);
-                usuario.setPassword(contra);
+                
                 if (usuario_editar == null) {
+                    
+                    if(contra.isEmpty() || contra2.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    if(!contra.equals(contra2)){
+                    
+                        JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    usuario.setPassword(contra);
                     String mensaje = controller_usuario.createUsuario(usuario);
                     System.out.println(mensaje);
                     JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -353,14 +359,14 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
                 this.dispose();
                 VistaUsuarios usuarios_ventana = new VistaUsuarios();
                 usuarios_ventana.setVisible(true);
-            } else {
-                if ((contra.equals(""))) {
-                    JOptionPane.showMessageDialog(null, "la contraseña no puede estar vacia.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    System.out.println("Algo salio mal");
-                    JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+//            } else {
+//                if ((contra.equals(""))) {
+//                    JOptionPane.showMessageDialog(null, "la contraseña no puede estar vacia.", "Error", JOptionPane.ERROR_MESSAGE);
+//                } else {
+//                    System.out.println("Algo salio mal");
+//                    JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+//            }
         }
 
 
@@ -373,6 +379,14 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         VistaUsuarios vista = new VistaUsuarios();
         vista.setVisible(true);
     }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        // TODO add your handling code here:
+        String id = usuario_editar.getIdUsuarios()+"";
+        VistaCambioContrasegna cambio_contra =new  VistaCambioContrasegna(id);
+        dispose();
+        cambio_contra.setVisible(true);
+    }//GEN-LAST:event_jPanel6MouseClicked
     public void cerrar() {
         try {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -440,7 +454,10 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelContrasegna;
+    private javax.swing.JPanel PanelContrasegna1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -451,6 +468,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPasswordField jPassword1;
     private javax.swing.JPasswordField jPassword2;
     private javax.swing.JTextField jTextApellidos;

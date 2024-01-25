@@ -27,6 +27,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
     UsuariosController usuarios_controller = new UsuariosController();
     public VistaUsuarios() {
         initComponents();
+        setResizable(false);
         gobal_cedula = null;
         jEditar.setVisible(false);
         jEliminar.setVisible(false);

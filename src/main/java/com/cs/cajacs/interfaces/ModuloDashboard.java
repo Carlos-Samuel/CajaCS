@@ -4,6 +4,9 @@
  */
 package com.cs.cajacs.interfaces;
 
+import com.cs.cajacs.controllers.UsuariosController;
+import com.cs.cajacs.modelos.Usuarios;
+
 /**
  *
  * @author carlossamuelmedinapardo
@@ -13,7 +16,10 @@ public class ModuloDashboard extends javax.swing.JFrame {
     /**
      * Creates new form ModuloDashboard
      */
+    UsuariosController ucontroller = new UsuariosController();
     public ModuloDashboard() {
+        Usuarios usuarioLogueado = ucontroller.getUsuarioLogueado();
+        System.out.println(usuarioLogueado.getNombres());
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -152,6 +158,9 @@ public class ModuloDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        ModuloLogin log = new ModuloLogin();
+        log.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -180,11 +189,17 @@ public class ModuloDashboard extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        VistaCambioContrasegna m = new VistaCambioContrasegna();
+        m.setVisible(true);
  
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        VistaUsuarios u = new  VistaUsuarios();
+        u.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**

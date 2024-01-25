@@ -34,6 +34,7 @@ public class DetalleVentasMedioPago extends javax.swing.JFrame {
     private MetodosDePagoController mcontroller = new MetodosDePagoController();
     public DetalleVentasMedioPago() {
         initComponents();
+        setResizable(false);
         this.setLocationRelativeTo(null);
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
                 List<Metodos_de_pago> prueba = mcontroller.getAllMetodosDePago();

@@ -20,6 +20,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class UsuariosController {
 
     private EntityManagerFactory emf;
+    private static Usuarios usuarioLogueado;
 
     public UsuariosController() {
         this.emf = Persistence.createEntityManagerFactory("MiUnidadPersistencia");
@@ -160,6 +161,7 @@ public class UsuariosController {
                 String claveEncriptada = DigestUtils.sha256Hex(password);
 
                 if (claveEncriptada.equals(usuario.getPassword())) {
+                    usuarioLogueado = usuario;
                     return usuario;
                 } else {
                     return null; // Contraseña incorrecta
@@ -200,6 +202,10 @@ public class UsuariosController {
         } finally {
             em.close();
         }
+    }
+
+    public static Usuarios getUsuarioLogueado() {
+        return usuarioLogueado;
     }
 
 }

@@ -46,6 +46,7 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
     public ForrmularoMetodosPago() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setResizable(false);
         jCheckBox1.setSelected(true);
         
     }

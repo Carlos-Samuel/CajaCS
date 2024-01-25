@@ -22,6 +22,7 @@ public class ModuloLogin extends javax.swing.JFrame {
     public ModuloLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**
@@ -54,9 +55,8 @@ public class ModuloLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel2.setText("Usuario*:");
 
-        jPasswordField1.setFont(new java.awt.Font("Helvetica Neue", 0, 13)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setText("Ingrese");
+        jPasswordField1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,8 +64,8 @@ public class ModuloLogin extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese su nombre de usuario");
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTextField1.setCaretColor(new java.awt.Color(204, 204, 204));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {

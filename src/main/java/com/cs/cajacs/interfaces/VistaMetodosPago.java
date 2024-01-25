@@ -38,7 +38,7 @@ public class VistaMetodosPago extends javax.swing.JFrame {
         cerrar();
         jEditar.setVisible(false);
         jEliminar.setVisible(false);
-       
+       setResizable(false);
         this.setLocationRelativeTo(null);
         List<Metodos_de_pago> metodos = mcontroller.getAllMetodosDePago();
         // Datos de ejemplo
