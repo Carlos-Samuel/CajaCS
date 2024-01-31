@@ -90,6 +90,7 @@ public class VistaConsolidadoVentasMedioPago extends javax.swing.JFrame {
         // Crear un modelo de tabla
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         jTable1.setModel(tableModel);
+          jTable1.setRowHeight(30);
     }
 
     /**

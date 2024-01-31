@@ -394,8 +394,9 @@ public class ForrmularoMetodosPago extends javax.swing.JFrame {
             if (!nombre.isEmpty() || !cuenta.isEmpty() ) {
                 metodo_editar.setDescripcion(nombre);
                 metodo_editar.setCuenta(cuenta);
-                System.out.println(jCheckBox1.isSelected());
                 metodo_editar.setActivo(jCheckBox1.isSelected());
+                System.out.println(jCheckBox1.isSelected());
+                //metodo_editar.setActivo(jCheckBox1.isSelected());
 
                 
                 if (imagen_editada){

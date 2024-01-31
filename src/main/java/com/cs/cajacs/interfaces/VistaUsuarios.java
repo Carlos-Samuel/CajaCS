@@ -62,6 +62,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
         // Crear un modelo de tabla
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         jTable1.setModel(tableModel);
+        jTable1.setRowHeight(30);
         
     }
 
@@ -184,7 +185,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jEliminar.setBackground(new java.awt.Color(255, 0, 0));
+        jEliminar.setBackground(new java.awt.Color(102, 255, 102));
         jEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jEliminarMouseClicked(evt);
@@ -193,7 +194,7 @@ public class VistaUsuarios extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Eliminar");
+        jLabel8.setText("Permisos");
 
         javax.swing.GroupLayout jEliminarLayout = new javax.swing.GroupLayout(jEliminar);
         jEliminar.setLayout(jEliminarLayout);
@@ -300,7 +301,15 @@ public class VistaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jEditarMouseClicked
 
     private void jEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jEliminarMouseClicked
-        // TODO add your handling code here:
+        if (gobal_cedula != null){
+            Permisos vista = new Permisos(gobal_cedula);
+                dispose();
+                vista.setVisible(true);
+            }
+        
+                // TODO add your handling code here:
+
+        
     }//GEN-LAST:event_jEliminarMouseClicked
 
     

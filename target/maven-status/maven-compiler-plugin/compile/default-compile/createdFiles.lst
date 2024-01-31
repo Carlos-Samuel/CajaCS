@@ -1,15 +1,18 @@
 com\cs\cajacs\interfaces\ForrmularoMetodosPago$5.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$6.class
+com\cs\cajacs\interfaces\Permisos$2.class
 com\cs\cajacs\interfaces\VistaMetodosPago$2.class
 com\cs\cajacs\modelos\PagosFacturasId.class
 com\cs\cajacs\interfaces\ForrmularoMetodosPago$2.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$3.class
+com\cs\cajacs\interfaces\Permisos.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$9.class
 com\cs\cajacs\interfaces\VistaMetodosPago$5.class
 com\cs\cajacs\interfaces\VistaUsuarios$1.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$4.class
 com\cs\cajacs\interfaces\ForrmularoMetodosPago$7.class
 com\cs\cajacs\interfaces\ModuloIngresoDatos$9.class
+com\cs\cajacs\interfaces\RadioButtonRenderer.class
 com\cs\cajacs\interfaces\VistaUsuarios.class
 com\cs\cajacs\interfaces\VistaMetodosPago.class
 com\cs\cajacs\interfaces\VistaConsolidadoVentasMedioPago$2.class
@@ -22,6 +25,7 @@ com\cs\cajacs\interfaces\ModuloIngresoDatos$8.class
 com\cs\cajacs\interfaces\VistaUsuarios$5.class
 com\cs\cajacs\interfaces\Formulario_Usuarios.class
 com\cs\cajacs\interfaces\ForrmularoMetodosPago.class
+com\cs\cajacs\interfaces\Permisos$1.class
 com\cs\cajacs\interfaces\Formulario_Usuarios$7.class
 com\cs\cajacs\interfaces\ForrmularoMetodosPago$4.class
 com\cs\cajacs\interfaces\VistaConsolidadoVentasMedioPago$1.class

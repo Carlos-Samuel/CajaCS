@@ -32,6 +32,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         cerrar();
         this.setLocationRelativeTo(null);
         PanelContrasegna1.setVisible(false);
+        //jTextCedula.setEditable(false);
     }
 
     public Formulario_Usuarios(String cedula) {
@@ -49,6 +50,7 @@ public class Formulario_Usuarios extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         PanelContrasegna.setVisible(false);
         PanelContrasegna1.setVisible(true);
+        jTextCedula.setEditable(false);
         
 //         JOptionPane.showMessageDialog(null, cedula, "Error", JOptionPane.ERROR_MESSAGE);
     }
