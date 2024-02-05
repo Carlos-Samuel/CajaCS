@@ -5,14 +5,18 @@
 package com.cs.cajacs.interfaces;
 
 import com.cs.cajacs.controllers.PermisosController;
+import com.cs.cajacs.controllers.UsuariosController;
 import com.cs.cajacs.controllers.UsuariosHasPagosFacturasController;
 import com.cs.cajacs.controllers.UsuariosHasPermisosController;
+import com.cs.cajacs.modelos.Usuarios;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,12 +29,18 @@ public class Permisos extends javax.swing.JFrame {
      */
     PermisosController pcontroller = new PermisosController();
     UsuariosHasPermisosController pscontroler = new UsuariosHasPermisosController();
-
+    UsuariosController ucontroller = new UsuariosController();
+     private List<JCheckBox> checkBoxes;
+     Usuarios usuarioLogueado ;
+     int id_entera ;
     public Permisos(String id) {
+        checkBoxes = new ArrayList<>();
+         usuarioLogueado = ucontroller.getUsuarioLogueado();
+         System.out.println(usuarioLogueado.getNombres());
         initComponents();
         List<com.cs.cajacs.modelos.Permisos> listado_permisos = pcontroller.getAllPermisos();
         Font font = new Font("Hecvetica Neue", Font.PLAIN, 24); // Define el tipo de fuente y el tamaño deseado
-        int id_entera = Integer.parseInt(id);
+         id_entera = Integer.parseInt(id);
         for (int i = 0; i < listado_permisos.size(); i++) {
 
             System.out.println();
@@ -39,9 +49,14 @@ public class Permisos extends javax.swing.JFrame {
             check.setFont(font);
 
             boolean tiene_permiso = pscontroler.verificarPermisoDeUsuario(id_entera, listado_permisos.get(i).getIdPermisos());
-
+            
+            System.out.println(listado_permisos.get(i).getDescripcion());
+            System.out.println(listado_permisos.get(i).getIdPermisos());
+            System.out.println(id_entera);
+         
+            System.out.println("##############################");
             check.setSelected(tiene_permiso);
-
+            checkBoxes.add(check);
             Panel.add(check);
             Panel.updateUI();
         }
@@ -102,11 +117,73 @@ public class Permisos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         Panel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Panel.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(Panel);
+
+        jPanel3.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Confirmar");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(16, 16, 16))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Cancelar");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel2)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,19 +191,65 @@ public class Permisos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        // TODO add your handling code here:
+        System.out.println(checkBoxes);
+        
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            
+            System.out.println(checkBoxes.get(i).isSelected());
+            if(checkBoxes.get(i).isSelected()){
+                boolean existe = pscontroler.verificarPermisoDeUsuario(id_entera,i+1);
+                if (existe){
+                    System.out.println("TIENE ESTE PERMISO");
+                }else{
+                
+                    String respuesta = pscontroler.createPermisoUsuario(id_entera, i+1);
+                }
+                
+            }else{
+                 boolean existe = pscontroler.verificarPermisoDeUsuario(id_entera,i+1);
+                 if (existe){
+                     String respuesta = pscontroler.deleteUsuarioPermiso(id_entera, i+1);
+                 }
+            
+            }
+            //verificarPermisoDeUsuario
+        }
+        JOptionPane.showMessageDialog(null, "Permisos editados correctamente.", "Afirmación", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+        VistaUsuarios vista = new VistaUsuarios();
+        vista.setVisible(true);
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+
+        this.dispose();
+        VistaUsuarios vista = new VistaUsuarios();
+        vista.setVisible(true);
+    }//GEN-LAST:event_jPanel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -165,6 +288,10 @@ public class Permisos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

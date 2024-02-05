@@ -38,7 +38,7 @@ public class UsuariosHasPermisosController {
                 mensaje = "Verifique la existencia del usuario y del permiso a asignar.";
                 em.getTransaction().rollback();
             } else {
-                em.createNativeQuery("INSERT INTO usuarios_has_permisos (Usuarios_idUsuarios, Permisos_idPermisos) VALUES (?, ?)")
+                em.createNativeQuery("INSERT INTO Usuarios_has_Permisos (Usuarios_idUsuarios, Permisos_idPermisos) VALUES (?, ?)")
                         .setParameter(1, idUsuario)
                         .setParameter(2, idPermiso)
                         .executeUpdate();
@@ -69,7 +69,7 @@ public class UsuariosHasPermisosController {
                     .setParameter("idUsuario", idUsuario)
                     .setParameter("idPermiso", idPermiso)
                     .getSingleResult();
-
+            System.out.println(count);
             return count > 0;
 
         } finally {

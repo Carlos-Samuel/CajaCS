@@ -5,7 +5,9 @@
 package com.cs.cajacs.interfaces;
 
 import com.cs.cajacs.controllers.UsuariosController;
+import com.cs.cajacs.controllers.UsuariosHasPermisosController;
 import com.cs.cajacs.modelos.Usuarios;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,11 +19,15 @@ public class ModuloDashboard extends javax.swing.JFrame {
      * Creates new form ModuloDashboard
      */
     UsuariosController ucontroller = new UsuariosController();
+    Usuarios usuarioLogueado;
+    UsuariosHasPermisosController pscontroler = new UsuariosHasPermisosController();
+
     public ModuloDashboard() {
-        Usuarios usuarioLogueado = ucontroller.getUsuarioLogueado();
+         usuarioLogueado = ucontroller.getUsuarioLogueado();
         System.out.println(usuarioLogueado.getNombres());
         initComponents();
         this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -151,14 +157,21 @@ public class ModuloDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
-        VistaConsolidadoVentasMedioPago nuevaVentana = new VistaConsolidadoVentasMedioPago();
-        
-        nuevaVentana.setVisible(true);
+        //2
+        boolean permiso = pscontroler.verificarPermisoDeUsuario(usuarioLogueado.getIdUsuarios(), 2);
+
+        if (permiso) {
+            dispose();
+            VistaConsolidadoVentasMedioPago nuevaVentana = new VistaConsolidadoVentasMedioPago();
+
+            nuevaVentana.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene permisos para este modulo.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         ModuloLogin log = new ModuloLogin();
         log.setVisible(true);
         dispose();
@@ -166,25 +179,45 @@ public class ModuloDashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        ModuloIngresoDatos nuevaVentana = new ModuloIngresoDatos();
-        nuevaVentana.setVisible(true);
+        //1#   JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.ERROR_MESSAGE);
+        boolean permiso = pscontroler.verificarPermisoDeUsuario(usuarioLogueado.getIdUsuarios(), 1);
+        if (permiso) {
+            ModuloIngresoDatos nuevaVentana = new ModuloIngresoDatos();
+            nuevaVentana.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene permisos para este modulo.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        dispose();
-        DetalleVentasMedioPago nuevaVentana = new DetalleVentasMedioPago();
-        nuevaVentana.setVisible(true);
+        //3
+        boolean permiso = pscontroler.verificarPermisoDeUsuario(usuarioLogueado.getIdUsuarios(), 3);
+
+        if (permiso) {
+            dispose();
+            DetalleVentasMedioPago nuevaVentana = new DetalleVentasMedioPago();
+            nuevaVentana.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene permisos para este modulo.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        //4
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        //5
         // TODO add your handling code here:
-        dispose();
-        VistaMetodosPago m = new VistaMetodosPago();
-        m.setVisible(true);
+        boolean permiso = pscontroler.verificarPermisoDeUsuario(usuarioLogueado.getIdUsuarios(), 5);
+
+        if (permiso) {
+            dispose();
+            VistaMetodosPago m = new VistaMetodosPago();
+            m.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene permisos para este modulo.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -192,14 +225,21 @@ public class ModuloDashboard extends javax.swing.JFrame {
         dispose();
         VistaCambioContrasegna m = new VistaCambioContrasegna();
         m.setVisible(true);
- 
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        //6
         // TODO add your handling code here:
-        dispose();
-        VistaUsuarios u = new  VistaUsuarios();
-        u.setVisible(true);
+        boolean permiso = pscontroler.verificarPermisoDeUsuario(usuarioLogueado.getIdUsuarios(), 6);
+
+        if (permiso) {
+            dispose();
+            VistaUsuarios u = new VistaUsuarios();
+            u.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene permisos para este modulo.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
